@@ -228,36 +228,162 @@
             font-size: 14px;
             line-height: 1.2;
         }
+.slide-container img {
+    width: 100%;  /* 가로 너비를 화면 전체로 설정 */
+    height: auto; /* 비율 유지하면서 크기 자동 조정 */
+    object-fit: cover; /* 이미지가 잘리지 않게 꽉 차도록 설정 */
+}
 
-        /* 🔹 햄버거 버튼 (모바일에서만 보이게) */
-        .menu-btn {
-            display: block; /* 기본적으로 숨김 */
-            cursor: pointer;
-            font-size: 30px;
-            background: none;
-            border: none;
-            color: #181C14;
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    z-index: 1100; /* 메뉴가 다른 요소에 가려지지 않도록 */
+/* 기본적으로 햄버거 버튼을 숨겨둡니다. */
+.menu-btn {
+    display: none; /* 기본적으로 숨겨두기 */
+    cursor: pointer;
+    font-size: 30px;
+    background: none;
+    border: none;
+    color: #181C14;
+}
+
+
+
+              .logo img {
+                 height: 30px;
+    display: block; /* 이미지를 블록 요소로 만듬 */
+    margin-left: 150px; /* 좌우 마진을 자동으로 설정하여 가운데 정렬 */
+             }
+
+         /* 🌟 헤더 영역 (슬라이드 효과 적용) */
+        .header {
+            position: relative;
+            width: 103%;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 1s ease-in-out;
+
         }
-        /* 🔹 모바일 네비게이션 설정 */
-        @media (max-width: 768px) {
+        .header h2 {
+            position: relative;
+            z-index: 1; /* 배경 위로 올리기 */
+            font-size: 20px; /* h2 글씨 크기 조정 */
+            color: white; /* 글자 색 유지 */
+            margin-top: -10px;
+
+        }
+        .header h1 {
+            position: relative;
+            z-index: 1; /* 배경 위로 올리기 */
+            font-size: 20px; /* h2 글씨 크기 조정 */
+            color: white; /* 글자 색 유지 */
+            margin-top: 80px;
+        }
+
+        h3 {
+            font-size: 20px;
+            line-height: 1.5;
+        }
+
+        p {
+            font-size: 15px;
+            line-height: 3.0;
+        }
+
+.main-content {
+    transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out;
+    z-index: 1;
+}
+
+
+/* ✅ 모바일에서 햄버거 버튼 보이고 기존 메뉴 숨김 */
+@media (max-width: 768px) {
+
+    .nav.active ~ .main-content {
+        opacity: 0.5; /* 투명도 */
+        filter: blur(10px); /* 흐림 효과 */
+        pointer-events: none; /* 클릭 방지 */
+    }
+
             .nav {
-                display: none; /* 처음에는 숨김 */
                 position: fixed;
                 top: 0;
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background: rgba(0, 0, 0, 0.9);
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 text-align: center; /* 텍스트가 중앙에 정렬되도록 */
             }
 
+.nav-container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* 슬라이드보다 위에 있도록 설정 */
+}
+
+
+    .menu-btn {
+        display: block; /* 모바일에서 햄버거 버튼 표시 */
+        position: absolute;
+        top: 5px;
+        right: 50px;
+        z-index: 1001;
+        font-size: 24px;
+        padding: 5px 10px;
+    }
+
+    .nav-menu {
+        display: none; /* 모바일에서는 기본 네비게이션 숨김 */
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: 250px; /* 화면 밖으로 숨김 */
+        width: 350px;        
+        padding-top: 60px;
+        height: 100vh;
+        background: #FAFAF8;
+    }
+
+    /* 햄버거 버튼 클릭 시 메뉴 활성화 */
+    .nav-menu.active {
+        right: 0;
+        display: flex;
+    } 
+
+.slide-container img {
+    width: 100%;  /* 가로 너비를 화면 전체로 설정 */
+    height: auto; /* 비율 유지하면서 크기 자동 조정 */
+    object-fit: cover; /* 이미지가 잘리지 않게 꽉 차도록 설정 */
+}
+
+/* 본문 전체를 감싸는 div */
+.main-content {
+    transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out;
+    z-index: 1;
+}
+
+        .logo img {
+            height: 30px;
+        display: block; /* 이미지를 블록 요소로 만듬 */
+        margin-left: 150px; /* 좌우 마진을 자동으로 설정하여 가운데 정렬 */
+    }
+
+     .header {
+    position: relative;
+    z-index: 0; /* 슬라이드 배경 이미지에 대한 z-index 설정 */
+}
+
+     .slideshow {
+         z-index: 0;
+ }
+
+  }
 
     </style>
 </head>
@@ -268,16 +394,18 @@
         <div class="logo">
             <img src="https://github.com/yebeen03/mass/blob/main/%EB%A1%9C%EA%B3%A0%20%EB%B8%94%EB%9E%99.png?raw=true" alt="Lab Logo">
         </div>
-        <div class="nav">
+        <button class="menu-btn">☰</button> <!-- 햄버거 버튼 -->
+    </div>
+        <div class="nav-menu">
             <a href="./index.html" class="nav-item home active">Home</a>
             <a href="./PI.html" class="nav-item">PI</a>  
             <a href="./lab.html" class="nav-item">Lab Intro</a>
             <a href="./members.html" class="nav-item">Members</a>
             <a href="./publication.html" class="nav-item">Publication</a>
             <a href="./photos.html" class="nav-item">Photos</a>
-            
-
         </div>
+<div class="nav-overlay"></div>
+
     </div>
 
     <!-- 🔹 슬라이드 이미지 -->
@@ -304,6 +432,32 @@
             }
         });
     });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const menuBtn = document.querySelector('.menu-btn');
+    const navMenu = document.querySelector('.nav-menu');
+    const nav = document.querySelector(".nav");
+    const overlay = document.querySelector(".nav-overlay");
+    const mainContent = document.querySelector(".main-content");
+
+
+    menuBtn.addEventListener('click', () => {
+        navMenu.classList.toggle('active'); // 메뉴 활성화/비활성화
+        nav.classList.toggle("active");
+        overlay.classList.toggle("active");
+        mainContent.classList.toggle("blur"); // 본문 반투명 효과
+
+    });
+
+    overlay.addEventListener("click", () => {
+        nav.classList.remove("active");
+        overlay.classList.remove("active");
+        mainContent.classList.remove("blur");
+    });
+
+});
 </script>
 
     <script>
@@ -337,16 +491,6 @@
 
   </script>
 
-        <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const menuBtn = document.querySelector('.menu-btn');
-            const nav = document.querySelector('.nav');
-
-            menuBtn.addEventListener('click', () => {
-                nav.classList.toggle('active'); // 메뉴 활성화/비활성화
-            });
-        });
-    </script>
 
 
     <div class="content">
