@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mass Spectroscopy Laboratory</title>
+    <style>
+        body {
+            margin-left: 0;
+            font-family: 'Arial', sans-serif;
+            color: white;
+            text-align: left;
+            padding: 0;
+            background-color: #FAFAF8; !important;
+            display: block;
+            width: 100%;
+        }
+
+        /* 푸터 설정: 스크롤 후 맨 아래에서 보이게 함 */
+        .footer {
+            height: 80px;
+            position: relative;
+            bottom: -60px; /* 기본적으로 페이지 아래에 숨겨둠 */
+            left: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #E9E8E8;
+            border-top: 1px solid #E9E8E8;
+            padding: 10px;
+            font-size: 14px;
+            color: black;
+            text-align: center;
+            transition: bottom 0.5s ease-in-out; /* 스크롤 끝까지 내리면 부드럽게 나타나게 설정 */
+        }
+
+        /* 푸터 내용 설정 */
+        .footer small {
+            color: black;
+            font-size: 10px;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.2;
+        }
+
+        }
+
+        .footer .address {
+            margin-bottom: 5px;
+            color: purple;
+        }
+
+        .footer .lab-name {
+            color: purple;
+        }
+
+        .footer .address span {
+            color: purple;
+            font-size: 10px;
+        }
+
+        .footer .copyright {
+            color: black;
+            margin: 0;
+        }
+
+        .footer a {
+            color: black;
+            text-decoration: none;
+        }
+
+  
+
+        .header h1 {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 36px; /* h1 글씨 크기를 36px로 설정 */
+            margin-bottom: 70px;
+        }
+
+        h3 {
+            font-size: 30px; /* h3 글씨 크기 */
+            font-weight: bold; /* 글씨 두껍게 */
+            color: black; /* 글씨 색을 어두운 파란색으로 설정 */
+            margin-top: 20px; /* 위쪽 여백 추가 */
+        
+        }           
+
+       h4 {
+            font-size: 20px; /* h3 글씨 크기 */
+            font-weight: bold; /* 글씨 두껍게 */
+            color: black; /* 글씨 색을 어두운 파란색으로 설정 */
+            text-decoration: underline; /* 밑줄 추가 */
+            text-underline-position: under;
+            margin-top: -200px;
+        }   
+
+        .header h2 {
+            position: relative;
+            z-index: 1; /* 배경 위로 올리기 */
+            font-size: 36px; /* h2 글씨 크기 조정 */
+            color: white; /* 글자 색 유지 */
+        }
+
+        /* 네비게이션 바 스타일 */
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #FAFAF8;
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 2px solid #D8D8D8;
+
+
+        }
+
+        .nav a {
+            color: #181C14;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-item:hover {
+            background-color: #E9E8E8;
+            color: darkblue;
+        }
+
+        .nav-item.active {
+            background-color: #435585;
+            color: white;
+        }
+
+        .nav-item.active::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #435585;
+            z-index: -1;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 15px;
+            margin-left: auto;
+            margin-right: 40px;
+        }
+
+        /* 본문 내용 */
+        .content {
+            background-color: transparent !important;
+            color: #181C14;
+            padding: 80px 20px 20px;
+            min-height: 100vh;
+            text-align: left;
+            margin-left: 0;
+        }
+
+        .scroll-section {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            text-align: left;
+        }
+
+        h3 {
+            font-size: 20px;
+            line-height: 1.5;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 2.0;
+            margin-left: 210px;
+        }
+
+@media screen and (max-width: 768px) {
+    .nav-container {
+        flex-direction: column; /* 모바일에서는 네비게이션을 세로 정렬 */
+        align-items: center;
+        padding: 15px 0;
+    }
+  
+
+    </style>
+</head>
+<body>
+
+    <!-- 🔹 네비게이션 바 -->
+    <div class="nav-container">
+        <div class="logo">
+            <img src="https://github.com/yebeen03/mass/blob/main/%EB%A1%9C%EA%B3%A0%20%EB%B8%94%EB%9E%99.png?raw=true" alt="Lab Logo">
+        </div>
+        <div class="nav">
+            <a href="./home.html" class="nav-item home active">Home</a>
+            <a href="./PI.html" class="nav-item">PI</a>
+            <a href="./lab.html" class="nav-item">Lab Intro</a>
+            <a href="./members.html" class="nav-item">Members</a>
+            <a href="./publication.html" class="nav-item">Publication</a>
+            <a href="./photos.html" class="nav-item">Photos</a>
+           
+
+        </div>
+    </div>
+
+    
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const navItems = document.querySelectorAll('.nav-item');
+        const currentPath = window.location.pathname.split("/").pop().toLowerCase(); // 현재 파일명 소문자로 변환
+
+        console.log("현재 페이지:", currentPath); // 디버깅용 콘솔 출력
+
+        navItems.forEach(item => {
+            item.classList.remove('active'); // 모든 메뉴에서 active 제거
+
+            // 현재 페이지와 a 태그 href 값이 정확히 일치하는 경우 active 추가
+            if (item.getAttribute('href') && item.getAttribute('href').toLowerCase().includes(currentPath)) {
+                console.log("활성화된 메뉴:", item.textContent); // 디버깅용 콘솔 출력
+                item.classList.add('active');
+            }
+        });
+    });
+</script>
+
+    <div class="content">
+
+     <img src="https://cc.kangwon.ac.kr/~chkwon/Chan%20Ho%20Kwon.jpg" 
+       alt="Profile Image" style="width: 350px; height: 450px; margin-top: 60px; margin-left: 100px;">
+
+
+ <p style="margin-left: 180px; line-height:1.5;">Office: +82-33-250-8496</p>
+
+<p style="margin-left: 140px; line-height:1.5;"><a href="mailto: ckkwon@kangwon.ac.kr">E-mail: chkwon@kangwon.ac.kr</a></p>
+	
+
+     <img src="https://github.com/yebeen03/mass/blob/main/%ED%81%90%EC%95%8C.jpg?raw=true" 
+       alt="Profile Image" style="width: 80px; height: 80px; margin-top: 20px; margin-left: 220px;">
+
+       <div class="publications">
+           <h3 style="text-align: left; margin-top: -660px; margin-left: 610px;  font-size: 30px; color: #435585;">Prof. Chan Ho Kwon</h3>
+
+<p style="color: gray; margin-left: 60px; font-size: 12px; line-height: 0.1; text-align: center;"><a href="http://chemistry.kangwon.ac.kr/chemistry/index.do" style="color: gray; text-decoration: none;">Department of Chemistry Kangwon National University, Chuncheon 24341, Korea</a></p>
+
+
+           <h4 style="text-align: left; margin-top: 70px; margin-left: 560px;">EDUCATION</h4>
+
+<p style="margin-left: 560px;"><b>B.S., Department of Chemistry (summa cum laude), Kangwon National University, Korea, 1997</b></p>
+
+<p style="margin-left: 560px;"><b>M.S., Department of Chemistry, Seoul National University, Korea, 1999</b>
+ <p style="color: #181C14; line-height: 1.8; margin-left: 560px; margin-top: -13px;">Advisor : Prof. Myung Soo Kim<br>· Thesis title : "Electromagnetic enhancement effect for surface-enhanced Raman scattering (SERS) <br> in morphology change by annealing of silver island film"</p>
+
+<p style="margin-left: 560px;"> <b> Ph.D.,School of Chemistry, Seoul National University, Korea,2004</b></p>
+ 
+<p style="color: #181C14; line-height: 1.8; margin-left: 560px; margin-top: -13px;">Advisor : Prof. Myung Soo Kim<br>· Thesis title : "Spectroscopy and mass spectrometry of state-selected benzenoid molecular ions"</p>
+
+
+          <h4 style="text-align: left; margin-top: 240px; margin-left: 110px;">PROFESSIONAL CAREER</h4>
+
+ <p style="margin-left: 110px; margin-top: 40px;"><b>Jun2016-May2018   Chairman at Department of Chemistry, Kangwon National University, Chuncheon, Korea.</b></p>
+
+<p style="margin-left: 110px;"><b>Aug2014-Nov2016   Director of Institute for Molecular Science and Fusion Technology, Kangwon National University, Chuncheon, Korea.</b></p>
+
+<p style="margin-left: 110px;"><b>Mar2006-present   Full-time Lecturer, Assistant Professor, Associate Professor, Full Professor at Department of Chemistry, Kangwon National University, Chuncheon, Korea.</b></p>
+
+ <p style="color: #181C14; line-height: 1.8; margin-left: 110px;">· Spectroscopic analysis (Conformer-specific VUV-MATI, IR dip/VUV-MATI, Circular polarized VUV-MATI (VCD), SERS spectroscopies)</p>
+<p style="color: #181C14; line-height: 1.8; margin-left: 110px;">· Mass spectrometry (IR desorption/VUV-MATI mass spectrometry)</p>
+
+ <p style="color: #181C14; line-height: 1.8; margin-left: 110px;">· Optical nano material development & Analysis</p>
+
+ <p style="color: #181C14; line-height: 1.8; margin-left: 110px;">· Quantum chemical calculation</p>
+
+<p style="margin-left: 110px;"><b>Jun2004-Feb2006   Research Associate, University of Wisconsin at Madison, WI, USA</b></p>
+ 
+<p style="color: #181C14; line-height: 1.8; margin-left: 110px; margin-top: -13px;"> Advisor: Prof. F. Fleming Crim</p>
+
+<p style="color: #181C14; line-height: 1.8; margin-left: 110px;">· Control of bimolecular reaction via mode- and bond-selection</p>
+<p style="color: #181C14; line-height: 1.8; margin-left: 110px;">· Implementing and completing the scheme for bimolecular reaction</p>
+
+<p style="margin-left: 110px;"><b>Mar2004-May2004   Postdoctoral Research Associate, Seoul National University, Seoul, Korea.        </b> </p>
+
+<p style="color: #181C14; line-height: 1.8; margin-left: 110px; margin-top: -13px;">Advisor: Prof. Myung Soo Kim</p>
+
+<p style="color: #181C14; line-height: 1.8; margin-left: 110px;">· VUV-MATI spectroscopy of interstellar molecules.</p>
+
+<p style="color: #181C14; line-height: 1.8; margin-left: 110px;">· Improving the VUV-MATI spectrometer (VUV laser, Monochromator, and MATI scheme).</p>
+
+<p style="margin-left: 110px;"><b>Mar1999-Feb2003   Research Assistant, Seoul National University, Seoul, Korea.</b></p>
+<p style="color: #181C14; line-height: 1.8; margin-left: 110px; margin-top: -13px;">Advisor: Prof. Myung Soo Kim</p>
+
+<p style="color: #181C14; line-height: 1.8; margin-left: 110px;">· Vibrational analysis of polyatomic ions by using the VUV-MATI technique and quantum chemical calculation</p>
+
+<p style="color: #181C14; line-height: 1.8; margin-left: 110px;">· Development of coherent VUV radiation source in the 104~150 nm range</p>
+
+<p style="color: #181C14; line-height: 1.8; margin-left: 110px;">· Achievement for generations of ions in excited electronic states</p>
+
+<p style="color: #181C14; line-height: 1.8; margin-left: 110px;">· Development of novel MS for discovery of ions in long-lived excited electronic state</p>
+
+<p style="color: #181C14; line-height: 1.8; margin-left: 110px;">· Discovery of ions in long-lived excited electronic state through charge exchange ionization mass spectrometry and photodissociation kinetics</p>
+
+<p style="margin-left: 110px;"><b>Mar1997-Feb1998      Research Assistant, Seoul National University, Seoul, Korea.</b></p>
+
+ <p style="color: #181C14; line-height: 1.8; margin-left: 110px; margin-top: -13px;">Advisor: Prof. Myung Soo Kim</p>
+
+<p style="color: #181C14; line-height: 1.8; margin-left: 110px;">· Investigation of the morphology changed by chemical and/or physical action utilizing FE-SEM, STM, and AFM techniques</p>
+<p style="color: #181C14; line-height: 1.8; margin-left: 110px;">· Spectroscopic investigations of molecules adsorbed on nano-sized silver sol and film by surface-enhanced Raman scattering (SERS)</p>
+
+<p style="color: #181C14; line-height: 1.8; margin-left: 110px;">· Study on enhancement mechanism experimentally and theoretically for SERS</p>
+
+<p style="color: #181C14; line-height: 1.8; margin-left: 110px;">· Design and implementation of Raman spectrophotometer to obtain the low frequency vibrational information of molecules (adsorbates)
+</p>
+
+<p style="margin-left: 110px;"><b>Mar1995-Jul1996      Undergraduate Research Assistant, Kangwon National University, Chuncheon, Korea.</b></p>
+
+<p style="color: #181C14; line-height: 1.8; margin-left: 110px;">· Theoretical study of the geometry of van der Waals complex using GAMESS package</p>
+
+<p style="margin-left: 110px;"><b>Oct1991-Feb1994      Army service, Korea.</b></p>
+          <h4 style="text-align: left; margin-top: 70px; margin-left: 110px;">TEACHING ASSISTANT EXPERIENCE</h4>
+
+<p style="color: #181C14; line-height: 1.8; margin-left: 110px;"><b>· General Chemistry Lab, Physical Chemistry Lab, and Physical Chemistry Lecture, Seoul National University.</b>
+</p>
+
+           <h4 style="text-align: left; margin-top: 70px; margin-left: 110px;">HONORS</h4>
+
+<p style="margin-left: 110px;"><b>2020 Award for Myung Soo Kim Academic Excellence Prize, KCS.</b></p>
+
+<p style="margin-left: 110px;"><b>2000, 2002, 2003  Award for Excellent Research Paper, Seoul National University.</b></p>
+
+<p style="margin-left: 110px;"><b>1997 Summa cum laude, Kangwon National University.</b></p>
+
+<p style="margin-left: 110px;"><b>1990, 1991, 1994, 1995, and 1996   Academic Excellence Scholarship Awards, Kangwon National University.</b></p>
+
+               </div>
+    </div>
+
+
+
+    <!-- 🔹 푸터 추가 -->
+    <div class="footer">
+        <p class="address">강원도 춘천시 강원대학길 1 자연과학대학 화학과 자1-311호</p>
+        <p class="copyright">Copyright(C) 2016 by <span class="lab-name">Mass Spectroscopy Lab</span>. All Rights Reserved.</p>
+        <p><a href="mailto:someone@example.com">mailto</a></p>
+    </div>
+
+</body>
+</html>

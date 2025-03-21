@@ -1,0 +1,459 @@
+사진 안열림
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mass Spectroscopy Laboratory</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: white;
+            text-align: center;
+            padding-bottom: 60px;
+            background-color: #FAFAF8 !important;
+            width: 100%;
+        }
+
+        /* 푸터 설정 */
+        .footer {
+            height: 80px;
+            position: relative;
+            bottom: -60px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #E9E8E8;
+            border-top: 1px solid #E9E8E8;
+            padding: 10px;
+            font-size: 14px;
+            color: black;
+            text-align: center;
+            transition: bottom 0.5s ease-in-out;
+            margin-top: 40px; /* 본문과 푸터 사이 여백 추가 */
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+        .footer .address {
+            margin-bottom: 5px;
+            color: purple;
+        }
+
+        .footer .lab-name {
+            color: purple;
+        }
+
+        .footer .address span {
+            color: purple;
+            font-size: 10px;
+        }
+
+        .footer .copyright {
+            color: black;
+            margin: 0;
+        }
+
+        .footer a {
+            color: black;
+            text-decoration: none;
+        }
+
+        /* 네비게이션 바 스타일 */
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #FAFAF8;
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 2px solid #D8D8D8;
+
+
+        }
+
+        .nav a {
+            color: #181C14;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-item:hover {
+            background-color: #E9E8E8;
+            color: darkblue;
+        }
+
+        .nav-item.active {
+            background-color: #435585;
+            color: white;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 15px;
+            margin-left: auto;
+            margin-right: 40px;
+        }
+
+        /* 본문 내용 */
+        .content {
+            background-color: transparent !important;
+            color: #181C14;
+            padding: 80px 20px 20px;
+            min-height: 100vh;
+    min-height: calc(100vh - 140px); /* 화면 높이에서 네비+푸터 높이를 뺀 최소 높이 */
+    padding-bottom: 0px; /* 푸터와의 간격 유지 */
+    margin: 0 auto;
+
+        }
+
+        /* 🔹 이미지 갤러리 스타일 */
+        .image-gallery {
+            display: inline-block;
+            text-align: center;
+            margin: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+        }
+
+ 
+
+        .image-gallery {
+            text-align: center; /* 이미지 & 텍스트 중앙 정렬 */
+            width: 250px; /* 개별 이미지 크기 고정 */
+            margin-top: -20px;
+        }
+
+        .gallery-container {
+            display: flex; /* 가로 정렬 */
+            justify-content: center; /* 중앙 정렬 */
+            flex-wrap: wrap; /* 한 줄에 4개 유지, 화면 작아지면 다음 줄로 */
+            gap: 20px; /* 이미지 사이 간격 */
+        }
+
+        .image-gallery img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+            max-width: 100%;
+            margin: 20px;
+
+        }
+
+        .image-gallery img:hover {
+            transform: scale(1.1);
+        }
+
+        /* 🔹 모달 스타일 */
+        .modal {
+      display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow: auto; /* 이미지가 크면 스크롤바 생기게 */
+
+        }
+
+        .modal-content {
+   background-color: white;
+    color: black;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    display: block;
+    max-width: 90%; /* 모달의 최대 너비 */
+    max-height: 90%; /* 모달의 최대 높이 */
+    overflow: hidden; /* 넘치는 이미지 숨기기 */
+    position: relative;
+        }
+
+        .close {
+            color: black;
+            float: right;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .image-group {
+            display: inline-block; /* 그룹을 블록 요소처럼 움직이게 설정 */
+            text-align: center; /* 텍스트를 이미지 중앙 정렬 */
+            margin: 20px; /* 주위 요소와 간격 유지 */
+        }
+
+        /* 이미지 스타일 */
+        .image-group img {
+            width: 200px; /* 원하는 크기로 조정 */
+            height: auto;
+            border-radius: 10px; /* 모서리 둥글게 */
+        }
+
+        /* 설명 텍스트 스타일 */
+        .image-gallery p {
+            margin-top: -10px;
+            margin-left: 25px;
+            font-size: 16px;
+            color: #333;
+        }
+
+/* 모달 이미지 스타일 */
+#modal-image {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 80vh; /* 이미지의 최대 높이를 화면 높이의 80%로 제한 */
+    display: block;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 768px) {
+    .nav-container {
+        flex-direction: column; /* 모바일에서는 네비게이션을 세로 정렬 */
+        align-items: center;
+        padding: 15px 0;
+    }
+
+    </style>
+</head>
+<body>
+
+    <!-- 🔹 네비게이션 바 -->
+    <div class="nav-container">
+        <div class="logo">
+            <img src="https://github.com/yebeen03/mass/blob/main/%EB%A1%9C%EA%B3%A0%20%EB%B8%94%EB%9E%99.png?raw=true" alt="Lab Logo">
+        </div>
+        <div class="nav">
+            <a href="./home.html" class="nav-item home active">Home</a>
+            <a href="./PI.html" class="nav-item">PI</a>  
+            <a href="./lab.html" class="nav-item">Lab Intro</a>
+            <a href="./members.html" class="nav-item">Members</a>
+            <a href="./publication.html" class="nav-item">Publication</a>
+            <a href="./photos.html" class="nav-item">Photos</a>
+        </div>
+    </div>
+
+    <!-- 🔹 본문 콘텐츠 -->
+    <div class="content">
+        <h3 style="font-size: 25px; text-align: left; margin-left: 130px; margin-top:40px;           text-decoration: underline; /* 밑줄 추가 */ text-underline-position: under;">Group Photos</h3>
+
+        <!-- 🔹 이미지 갤러리 -->
+   <div class="gallery-container">
+
+        <div class="image-gallery">
+            <img src="https://cc.kangwon.ac.kr/~chkwon/202405_4th-year%20stdudents.jpg" alt="사진 1" onclick="openModal('https://cc.kangwon.ac.kr/~chkwon/202405_4th-year%20stdudents.jpg', '202405 4th-year stdudents, 후문')">
+  <p>202405</p>
+         </div>
+
+        <div class="image-gallery">
+            <img src="https://cc.kangwon.ac.kr/~chkwon/202410%20KCS%20participation.jpg" alt="사진 2" onclick="openModal('https://cc.kangwon.ac.kr/~chkwon/202410%20KCS%20participation.jpg', '202410 KCS participation, 창원')">
+  <p>202410</p>
+
+         </div>
+
+        <div class="image-gallery">
+            <img src="https://cc.kangwon.ac.kr/~chkwon/202102%20photos%20for%20graduations1.jpg" alt="사진 3" onclick="openModal('https://cc.kangwon.ac.kr/~chkwon/202102%20photos%20for%20graduations1.jpg', '202102 Congratulations on graduating, 미래광장')">
+  <p>202102</p>
+         </div>
+
+        <div class="image-gallery">
+            <img src="https://cc.kangwon.ac.kr/~chkwon/202102%20photos%20for%20graduations2.jpg" alt="사진 4" onclick="openModal('https://cc.kangwon.ac.kr/~chkwon/202102%20photos%20for%20graduations2.jpg', '202102 Congratulations on graduating, 잣터')">
+  <p>202102</p>
+        </div>
+
+       <div class="image-gallery">
+            <img src="https://cc.kangwon.ac.kr/~chkwon/2020%20KSMS%20Summer%20Conference.jpg" alt="사진 1" onclick="openModal('https://cc.kangwon.ac.kr/~chkwon/2020%20KSMS%20Summer%20Conference.jpg', '2020 한국질량분석학회(KSMS) Summer Conference, 제주')">
+  <p>2020</p>
+         </div>
+
+        <div class="image-gallery">
+            <img src="https://cc.kangwon.ac.kr/~chkwon/Myung%20Soo%20Kim%20Academic%20Excellence%20Prize.jpg" alt="사진 2" onclick="openModal('2020', '2020 Award for Myung Soo Kim Academic Excellence Prize, 대한화학회 (KCS)')">
+  <p>2020</p>
+         </div>
+
+        <div class="image-gallery">
+            <img src="https://cc.kangwon.ac.kr/~chkwon/2019%20Manchester%20International%20Symposium1.jpg" alt="사진 3" onclick="openModal('https://cc.kangwon.ac.kr/~chkwon/2019%20Manchester%20International%20Symposium1.jpg', '2019 Manchester International Symposium Opening, 영국')">
+  <p>2019</p>
+         </div>
+
+        <div class="image-gallery">
+            <img src="https://cc.kangwon.ac.kr/~chkwon/2019%20Manchester%20International%20Symposium%20group.jpg" alt="사진 4" onclick="openModal('https://cc.kangwon.ac.kr/~chkwon/2019%20Manchester%20International%20Symposium%20group.jpg', '2019 Group photo at Manchester International Symposium, 영국')">
+  <p>2019</p>
+        </div>
+
+       <div class="image-gallery">
+            <img src="https://cc.kangwon.ac.kr/~chkwon/2018KCSinJejuICC1.jpg" alt="사진 1" onclick="openModal('https://cc.kangwon.ac.kr/~chkwon/2018KCSinJejuICC1.jpg', '2018 KCS Meeting at ICC, 제주')">
+  <p>2018</p>
+         </div>
+
+        <div class="image-gallery">
+            <img src="https://cc.kangwon.ac.kr/~chkwon/2018KCSinJejuICC2.jpg" alt="사진 2" onclick="openModal('https://cc.kangwon.ac.kr/~chkwon/2018KCSinJejuICC2.jpg', '2018 KCS Meeting at ICC, 제주')">
+  <p>2018</p>
+
+         </div>
+
+        <div class="image-gallery">
+            <img src="https://cc.kangwon.ac.kr/~chkwon/2017%20KF%20symposium.JPG" alt="사진 3" onclick="openModal('https://cc.kangwon.ac.kr/~chkwon/2017%20KF%20symposium.JPG', '2017 The Korean-French Joint Symposium at KNU')">
+  <p>2017</p>
+         </div>
+
+        <div class="image-gallery">
+            <img src="https://cc.kangwon.ac.kr/~chkwon/ICAVS9.JPG" alt="사진 4" onclick="openModal('https://cc.kangwon.ac.kr/~chkwon/ICAVS9.JPG', '5월 F. Fleming Crim 교수님 강원대학교 방문')">
+  <p>2017</p>
+        </div>
+
+       <div class="image-gallery">
+            <img src="https://cc.kangwon.ac.kr/~chkwon/FFleming.jpg" alt="사진 1" onclick="openModal('https://cc.kangwon.ac.kr/~chkwon/FFleming.jpg', '5월 F. Fleming Crim 교수님 강원대학교 방문')">
+  <p>2017</p>
+         </div>
+
+        <div class="image-gallery">
+            <img src="https://cc.kangwon.ac.kr/~chkwon/JHougen.JPG" alt="사진 2" onclick="openModal(https://cc.kangwon.ac.kr/~chkwon/JHougen.JPG', '5월 교토대학교에서 구두발표 후 J. Hougen 박사님과 함께, 일본')">
+  <p>2017</p>
+
+         </div>
+
+        <div class="image-gallery">
+            <img src="https://cc.kangwon.ac.kr/~chkwon/YTLee.jpg" alt="사진 3" onclick="openModal('https://cc.kangwon.ac.kr/~chkwon/YTLee.jpg', 'IUPAC-2015에서 노벨 수상자 Y. T. Lee 교수님과, 부산')">
+  <p>2017</p>
+         </div>
+
+        <div class="image-gallery">
+            <img src="https://cc.kangwon.ac.kr/~chkwon/Lab2.jpg" alt="사진 4" onclick="openModal('https://cc.kangwon.ac.kr/~chkwon/Lab2.jpg', '실험실 워크샵 후 한라산 백록담에서')">
+  <p>2015</p>
+        </div>
+       <div class="image-gallery">
+            <img src="https://cc.kangwon.ac.kr/~chkwon/ICP2015_1.jpg" alt="사진 1" onclick="openModal('https://cc.kangwon.ac.kr/~chkwon/ICP2015_1.jpg', 'ICP2015 참가 후 세속각에서')">
+  <p>2015</p>
+         </div>
+
+        <div class="image-gallery">
+            <img src="https://cc.kangwon.ac.kr/~chkwon/Workshop2.jpg" alt="사진 2" onclick="openModal('https://cc.kangwon.ac.kr/~chkwon/Workshop2.jpg, 한라산 등반전 성판악에서')">
+  <p>2015</p>
+
+         </div>
+
+        <div class="image-gallery">
+            <img src="https://cc.kangwon.ac.kr/~chkwon/Workshop1.jpg" alt="사진 3" onclick="openModal('https://cc.kangwon.ac.kr/~chkwon/Workshop1.jpg', '문배마을에서')">
+  <p>2015</p>
+         </div>
+
+        <div class="image-gallery">
+            <img src="https://cc.kangwon.ac.kr/~chkwon/Workshop2014.jpg" alt="사진 4" onclick="openModal('https://cc.kangwon.ac.kr/~chkwon/Workshop2014.jpg', '물리분과 하계심포지엄 후 불국사에서')">
+  <p>2014</p>
+        </div>
+
+        <div class="image-gallery">
+            <img src="https://cc.kangwon.ac.kr/~chkwon/2013Summer.JPG" alt="사진 4" onclick="openModal('https://cc.kangwon.ac.kr/~chkwon/2013Summer.JPG', '2013년 여름 잣터에서')">
+  <p>2014</p>
+        </div>
+</div>
+
+    <div class="content">
+        <h3 style="font-size: 25px; text-align: left; margin-left: 130px; text-decoration: underline; margin-top: 50px; /* 밑줄 추가 */ text-underline-position: under;">Lab Photos</h3>
+ 
+            <img src="https://cc.kangwon.ac.kr/~chkwon/Lab1.jpg" alt="사진 1" style="width: 600px; height: auto; text-align: left; margin-left: 60px; display: block; margin-top: 50px;">
+           <img src="https://cc.kangwon.ac.kr/~chkwon/Instrum2.jpg" alt="사진 1" style="width: 600px; height: auto; text-align: center; margin-left: 800px; display: block; margin-top: -450px;">
+
+            <img src="https://cc.kangwon.ac.kr/~chkwon/reagent%20room.jpg" alt="사진 1" style="width: 600px; height: auto; text-align: left; margin-left: 60px; display: block; margin-top: 50px;">
+           <img src="https://cc.kangwon.ac.kr/~chkwon/study%20room.jpg" alt="사진 1" style="width: 600px; height: auto; text-align: center; margin-left: 800px; display: block; margin-top: -450px;">
+
+
+
+
+
+    </div>
+
+    <!-- 🔹 모달 -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+           <span id="close" class="close" onclick="closeModal()">&times;</span>
+            <img id="modal-image" src="" alt="모달 이미지">
+            <p id="modal-text"></p>
+        </div>
+    </div>
+    </div>
+
+    <!-- 🔹 푸터 -->
+    <div class="footer">
+        <p class="address">강원도 춘천시 강원대학길 1 자연과학대학 화학과 자1-311호</p>
+        <p class="copyright">Copyright(C) 2016 by <span class="lab-name">Mass Spectroscopy Lab</span>. All Rights Reserved.</p>
+        <p><a href="mailto:someone@example.com">mailto</a></p>
+    </div>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const navItems = document.querySelectorAll('.nav-item');
+        const currentPath = window.location.pathname.split("/").pop().toLowerCase(); // 현재 파일명 소문자로 변환
+
+        console.log("현재 페이지:", currentPath); // 디버깅용 콘솔 출력
+
+        navItems.forEach(item => {
+            item.classList.remove('active'); // 모든 메뉴에서 active 제거
+
+            // 현재 페이지와 a 태그 href 값이 정확히 일치하는 경우 active 추가
+            if (item.getAttribute('href') && item.getAttribute('href').toLowerCase().includes(currentPath)) {
+                console.log("활성화된 메뉴:", item.textContent); // 디버깅용 콘솔 출력
+                item.classList.add('active');
+            }
+        });
+    });
+</script>
+
+
+    <!-- 🔹 JavaScript -->
+    <script>
+ function openModal(imageSrc, text) {
+    var modal = document.getElementById('modal');  // 모달 요소 가져오기
+    var modalImage = document.getElementById('modal-image'); 
+    var modalText = document.getElementById('modal-text'); 
+
+    console.log("이미지 소스:", imageSrc); // 디버깅
+    if (!imageSrc) { 
+        console.error("이미지 소스가 없습니다!");
+        return;
+    } 
+
+    modalImage.src = imageSrc;
+    modalText.textContent = text;
+    modal.style.display = 'flex'; // 모달 표시
+}
+function closeModal() {
+    var modal = document.getElementById('modal');
+    modal.style.display = 'none';
+}
+
+
+    </script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mass Spectroscopy Laboratory</title>
+    <style>
+        body {
+            margin-left: 0;
+            font-family: 'Arial', sans-serif;
+            color: white;
+            text-align: left;
+            padding: 0;
+            background-color: #FAFAF8 !important;
+            display: block;
+            width: 100%;
+        }
+
+        /* 푸터 설정: 스크롤 후 맨 아래에서 보이게 함 */
+        .footer {
+            height: 80px;
+            position: relative;
+            bottom: -60px; /* 기본적으로 페이지 아래에 숨겨둠 */
+            left: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #E9E8E8;
+            border-top: 1px solid #E9E8E8;
+            padding: 10px;
+            font-size: 14px;
+            color: black;
+            text-align: center;
+            transition: bottom 0.5s ease-in-out; /* 스크롤 끝까지 내리면 부드럽게 나타나게 설정 */
+        }
+
+        /* 푸터 내용 설정 */
+        .footer small {
+            color: black;
+            font-size: 10px;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+        .footer .address {
+            margin-bottom: 5px;
+            color: purple;
+        }
+
+        .footer .lab-name {
+            color: purple;
+        }
+
+        .footer .address span {
+            color: purple;
+            font-size: 10px;
+        }
+
+        .footer .copyright {
+            color: black;
+            margin: 0;
+        }
+
+        .footer a {
+            color: black;
+            text-decoration: none;
+        }
+
+  
+
+        .header h1 {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 36px; /* h1 글씨 크기를 36px로 설정 */
+            margin-bottom: 70px;
+        }
+
+        h3 {
+            font-size: 30px; /* h3 글씨 크기 */
+            font-weight: bold; /* 글씨 두껍게 */
+            color: black; /* 글씨 색을 어두운 파란색으로 설정 */
+            margin-top: 20px; /* 위쪽 여백 추가 */
+            text-decoration: underline; /* 밑줄 추가 */
+            text-underline-position: under;
+        }           
+
+        .header h2 {
+            position: relative;
+            z-index: 1; /* 배경 위로 올리기 */
+            font-size: 36px; /* h2 글씨 크기 조정 */
+            color: white; /* 글자 색 유지 */
+        }
+
+        /* 네비게이션 바 스타일 */
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #FAFAF8;
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 2px solid #D8D8D8;
+
+
+        }
+
+        .nav a {
+            color: #181C14;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-item:hover {
+            background-color: #E9E8E8;
+            color: darkblue;
+        }
+
+        .nav-item.active {
+            background-color: #435585;
+            color: white;
+        }
+
+        .nav-item.active::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #435585;
+            z-index: -1;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 15px;
+            margin-left: auto;
+            margin-right: 40px;
+        }
+
+        /* 본문 내용 */
+        .content {
+            background-color: transparent !important;
+            color: #181C14;
+            padding: 80px 20px 20px;
+            min-height: 100vh;
+            text-align: left;
+            margin-left: 0;
+        }
+
+        .scroll-section {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            text-align: left;
+        }
+
+        h3 {
+            font-size: 30px;
+            line-height: 1.5;
+        }
+
+        p {
+            font-size: 20px;
+            line-height: 3.0;
+        }
+
+        .footer p {
+            font-size: 14px;
+            line-height: 1.2;
+        }
+@media screen and (max-width: 768px) {
+    .nav-container {
+        flex-direction: column; /* 모바일에서는 네비게이션을 세로 정렬 */
+        align-items: center;
+        padding: 15px 0;
+    }
+    </style>
+</head>
+<body>
+
+    <!-- 🔹 네비게이션 바 -->
+    <div class="nav-container">
+        <div class="logo">
+            <img src="https://github.com/yebeen03/mass/blob/main/%EB%A1%9C%EA%B3%A0%20%EB%B8%94%EB%9E%99.png?raw=true" alt="Lab Logo">
+        </div>
+        <div class="nav">
+            <a href="./home.html" class="nav-item home active">Home</a>
+            <a href="./PI.html" class="nav-item">PI</a>   
+            <a href="./lab.html" class="nav-item">Lab Intro</a>
+            <a href="./members.html" class="nav-item">Members</a>
+            <a href="./publication.html" class="nav-item">Publication</a>
+            <a href="./photos.html" class="nav-item">Photos</a>
+           
+
+        </div>
+    </div>
+
+    
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const navItems = document.querySelectorAll('.nav-item');
+        const currentPath = window.location.pathname.split("/").pop().toLowerCase(); // 현재 파일명 소문자로 변환
+
+        console.log("현재 페이지:", currentPath); // 디버깅용 콘솔 출력
+
+        navItems.forEach(item => {
+            item.classList.remove('active'); // 모든 메뉴에서 active 제거
+
+            // 현재 페이지와 a 태그 href 값이 정확히 일치하는 경우 active 추가
+            if (item.getAttribute('href') && item.getAttribute('href').toLowerCase().includes(currentPath)) {
+                console.log("활성화된 메뉴:", item.textContent); // 디버깅용 콘솔 출력
+                item.classList.add('active');
+            }
+        });
+    });
+</script>
+
+
+    <div class="content">
+
+  
+            
+             <h3 class="text-align: left;">PUBLICATIONS</h3>
+            <p><b>78. Plasmon-induced azo coupling of 4-amino-4'-nitrobiphenyl on Ag nanoparticles: via -NH<sub>2</sub> and/or -NO<sub>2</sub>?</b><br>
+  Sangeun Kim, S. Y. Eom, and C. H. Kwon<sup>*</sup>, in preparation to submit. </span> </p>  <br>
+           <p><b>77. Study on plasmon-induced azo coupling reaction of 4-aminocyanobiphenyl on Ag and Au nanoparticles</b><br>
+  S. Y. Eom and C. H. Kwon<sup>*</sup>, in preparation to submit. </span> </p>  <br>
+  <p><b>76. Accurate cationic HN<sub>3</sub> structure by VUV-MATI spectroscopy using non-resonant four-wave sum frequency mixing in Kr</b><br>
+  D. W. Kang, S. M. Park, and C. H. Kwon<sup>*</sup>, in preparation to submit. </span> </p>  <br>
+
+ 
+       
+  <p><b>75. Low-frequency mode coupling and vibrational structure of cationic thietane by one-photon VUV-MATI and two-photon IR+VUV-MATI spectroscopies</b><br>
+  S. M. Park,<sup>†</sup> Y. R. Lee,<sup>†</sup>, and C. H. Kwon<sup>*</sup>, in preparation to submit. </span> </p>  <br>
+
+
+     
+  <p><b>74. VUV-MATI spectroscopic determination of precise propargyl radical cationic structure</b> <br>
+  D. W. Kang and C. H. Kwon<sup>*</sup>, in preparation to submit.</span> </p>  <br>
+
+
+       
+  <p><b>73. Valence molecular orbitals and cationic structures of 3-fluoropyridine </b><br>
+  S. M. Park and C. H. Kwon<sup>*</sup>, in preparation to submit. </span> </p>  <br>
+
+ 
+       
+  <p><b>72. Precise vibrational structure of cationic oxetane by IR+VUV-MATI spectroscopy</b><br>
+  S. M. Park,<sup>†</sup> D. W. Kang,<sup>†</sup>, and C. H. Kwon<sup>*</sup>, in preparation to submit. </span> </p>  <br>
+
+ 
+       
+  <p><b>71. Unraveling the Conformational and Electronic Landscape of 3-Pyridinecarboxaldehyde: A Spectroscopic Journey Through Conformer-Specific Ionization</b><br>
+  S. M. Park, H. Kim, and C. H. Kwon<sup>*</sup>, 2025, Submitted. </span> </p>  <br>
+
+ 
+       
+  <p><b>70. Deciphering the Electronic Structure and Conformational Stability of 2-Pyridinecarboxaldehyde</b><br>
+  H. Kim,<sup>†</sup> S. M. Park,<sup>†</sup>, and C. H. Kwon<sup>*</sup>, 2025, Submitted. </span> </p>  <br>
+
+ 
+       
+  <p><b>69. Exploring 3,5-Difluoropyridine: Bridging the Knowledge Gap in Fluorinated Pyridine Chemistry</b><br>
+  H. Kim,<sup>†</sup> S. M. Park,<sup>†</sup>, and C. H. Kwon<sup>*</sup>, 2025, Submitted. </span> </p>  <br>
+
+ 
+       
+  <p><b>68. Uncovering the Role of Fluorine Positioning on Cationic Properties of 2,4- Difluoropyridine</b><br>
+  H. Kim,<sup>†</sup> S. M. Park,<sup>†</sup>, and C. H. Kwon<sup>*</sup>, <br>
+  <i>Phys. Chem. Chem. Phys.</i> <b>27</b>, 5296-5304 (2025).</span> </p> <br>
+
+ 
+       
+  <p><b>67. Ionization-induced Structural Dynamics: Effect of Fluorine Positioning on Cationic Properties of Difluoropyridines</b><br>
+  H. Kim,<sup>†</sup> S. M. Park,<sup>†</sup>, and C. H. Kwon<sup>*</sup>, <br>
+  <i>J. Chem. Phys.</i> 2025, in revision.</span> </p> <br>
+
+ 
+       
+  <p><b>66. Investigating valence orbitals and cationic structure of 2,6-difluoropyridine via high-resolution VUV-MATI spectroscopy and Franck-Condon simulations </b><br>
+  S. M. Park, H. Kim, and C. H. Kwon<sup>*</sup>, <br>
+  <i>Phys. Chem. Chem. Phys.</i> <b>26</b>, 29805-29812 (2024).</span> </p> <br>
+   
+
+       
+  <p><b>65. Impact of chlorine substitution on valence orbitals and ionization dynamics in 3-chloropyridine: Insights from high-resolution vacuum ultraviolet mass-analyzed threshold ionization study </b><br>
+  S. M. Park, H. Kim, and C. H. Kwon<sup>*</sup>, <br>
+  <i>J. Chem. Phys.</i> <b>160</b>, 174302 (2024).</span> </p> <br>
+
+
+       
+  <p><b>64. Deciphering the conformational preference and ionization dynamics of tetrahydrofuran: Insights from advanced spectroscopic techniques </b><br>
+  S. M. Park and C. H. Kwon<sup>*</sup>, <br>
+  <i>J. Chem. Phys.</i> <b>160</b>, 114308 (2024).</span> </p> <br>
+
+
+     
+  <p><b>63. Conformational diversity and environmental implications of <i>trans</i>-2-pentenal</b> <br>
+  S. M. Park and C. H. Kwon<sup>*</sup> <br>
+  <i>Phys. Chem. Chem. Phys.</i> <b>25</b>, 28612-28620 (2023). <br>
+  -This article has been selected as a 2023 HOT PCCP Articles. </span> </p>  <br>
+      
+
+       
+  <p><b>62. Unraveling the Conformational Preference of Morpholine: Insights from Infrared Resonant Vacuum Ultraviolet Photoionization Mass Spectroscopy</b><br>
+  S. M. Park and C. H. Kwon<sup>*</sup> <br>
+   <i>J. Phys. Chem. Lett.</i> <b>14</b>, 9472-9478 (2023).</span></p> <br>
+
+
+     
+  <p><b>61. Determination of the highest occupied molecular orbital and conformational structures of morpholine based on its conformer-specific photoionization dynamics </b> <br>
+  S. Y. Eom, Y. R. Lee, S. M. Park, and C. H. Kwon<sup>*</sup> <br>
+   <i>Phys. Chem. Chem. Phys.</i> <b>24</b>, 28477-28485 (2022).</span></p> <br>
+ 
+
+       
+  <p><b>60. Conformational structures of neutral and cationic pivaldehyde revealed by IR-resonant VUV-MATI mass spectroscopy</b><br>
+  S. M. Park,<sup>†</sup> Y. R. Lee,<sup>†</sup> and C. H. Kwon<sup>*</sup> <br>
+  <i>Int. J. Mol. Sci.</i> <b>23</b>, 14777 (2022). <br>
+  This paper has been published as part of the Special Issue "<i>State-of-the-Art Physical Chemistry and Chemical Physics in Korea</i>" in IJMS.</span> </p>  <br>
+
+
+     
+  <p><b>59. Valence molecular orbitals and cationic structures of 2-fluoropyridine by high-resolution ion spectroscopy and Franck-Condon fitting</b> <br>
+  Y. R. Lee and C. H. Kwon<sup>*</sup> <br>
+   <i>J. Chem. Phys.</i> <b>157</b>, 154306 (2022).</span> </p> <br>
+      
+ 
+     
+  <p><b>58. Determination of highest occupied molecular orbital and cationic structures of cyclopentanone using high-resolution vacuum ultraviolet mass-analyzed threshold ionization mass spectrophotometry</b> <br>
+  Y. R. Lee and C. H. Kwon<sup>*</sup> <br>
+    <i>Bull. Korean Chem. Soc.</i> <b>43</b>, 636-644 (2022).<br>
+  This paper has been published as part of the Special Issue "<i>Advances of Physical Chemistry in Korea</i>" in BKCS.</span> </p>  <br>
+
+ 
+     
+  <p><b>57. Identification of individual conformers in C<sub>4</sub>H<sub>6</sub>O isomers using conformer-specific vibrational spectroscopy</b> <br>
+  S. M. Park and C. H. Kwon<sup>*</sup> <br>
+   <i>RSC Adv.</i> <b>11</b>, 38240-38246 (2021).</span> </p>  <br>
+
+ 
+     
+  <p><b>56. Innovative mass spectrometer for high-resolution ion spectroscopy</b> <br>
+  Y. R. Lee and C. H. Kwon<sup>*</sup> <br>
+    <i>J. Chem. Phys.</i> <b>155</b>, 164203 (2021). </span></p> <br>
+
+ 
+     
+  <p><b>55. Development and verification of conformer-specific vibrational spectroscopy</b> <br>
+  S. M. Park and C. H. Kwon<sup>*</sup> <br>
+     <i>J. Phys. Chem. A</i> <b>125</b>, 9251-9258 (2021). </span></p> <br>      
+
+ 
+     
+  <p><b>54. Probing the photoionization dynamics of 2-cyclopenten-1-one via high-resolution VUV-MATI spectroscopy</b> <br>
+  Y. R. Lee, M. H. Kim,<sup>*</sup> and C. H. Kwon<sup>*</sup> <br>
+      <i>J. Phys. Chem. A</i> <b>125</b>, 2356-2363 (2021) <br>
+      This paper is published as part of The Journal of Physical Chemistry virtual special issue "<i>Cheuk-Yiu Ng Festschrift</i>".</span> </p>  <br>
+
+ 
+       
+  <p><b>53. One-photon VUV-MATI and two-photon IR+VUV-MATI spectroscopic determination of oxetane cation ring-puckering vibrations and conformation</b><br>
+  D. W. Kang,<sup>†</sup> S. M. Park,<sup>†</sup> C. B. Park, B. J. Sung, H. L. Kim, and C. H. Kwon<sup>*</sup> <br>
+        <i>J. Chem. Phys.</i> <p><b>154</b>, 054308 (2021). </span></p> <br>
+
+ 
+     
+  <p><b>52. Conformational structure of cationic tetrahydropyran by one-photon vacuum ultraviolet mass-analyzed threshold ionization spectroscopy</b> <br>
+  S. Y. Eom,<sup>†</sup> D. W. Kang,<sup>†</sup> and C. H. Kwon<sup>*</sup> <br>
+        <i>Phys. Chem. Chem. Phys.</i> <p><b>23</b>, 1414-1423 (2021). </span></p> <br>
+
+  
+       
+  <p><b>51. Conformational potential energy surfaces and cationic structure of 3,4-dihydro-2H-pyran by VUV-MATI spectroscopy and Franck-Condon fitting</b><br>
+  D. W. Kang, D. K. Yoon, and C. H. Kwon<sup>*</sup><br>
+       <i>Phys. Chem. Chem. Phys.</i> <b>22</b>, 27673-27680 (2020). </span></p> <br>
+  
+  
+     
+  <p><b>50. Accurate conformational stability and cationic structure of piperidine determined by conformer-specific VUV-MATI spectroscopy</b> <br>
+  S. Y. Eom, Y. R. Lee, and C. H. Kwon<sup>*</sup><br>
+       <i>Phys. Chem. Chem. Phys.</i> <b>22</b>, 22823-22832 (2020). </span></p> <br>
+
+ 
+  
+  <p><b>49. Conformer-specific VUV-MATI spectroscopy of methyl vinyl ketone: Stabilities and cationic structures of the s-<i>trans</i> and s-<i>cis</i> conformers</b> <br>
+  S. M. Park, J. Choi, H. L. Kim, and C. H. Kwon<sup>*</sup><br>
+       <i>Phys. Chem. Chem. Phys.</i> <b>22</b>, 28383-28392 (2020). </span></p> <br>
+      
+ 
+  
+  <p><b>48. Determination of the highest occupied molecular orbital and cationic structure of 2-chloropyridine by one-photon VUV-MATI spectroscopy and Franck-Condon fitting</b><br>
+  Y. R. Lee, N. Choi, and C. H. Kwon<sup>*</sup><br>
+        <i>Phys. Chem. Chem. Phys.</i> <b>22</b>, 20858-20866 (2020). </span></p> <br>
+      
+ 
+  
+  <p><b>47. Determination of the cationic conformational structure of tetrahydrothiophene by one-photon MATI spectroscopy and Franck-Condon fitting</b> <br>
+  Y. R. Lee, H. L. Kim, and C. H. Kwon<sup>*</sup><br>
+       <i>Phys. Chem. Chem. Phys.</i> <b>22</b>, 6184-6191 (2020). </span></p> <br>
+       
+ 
+  
+  <p><b>46. Ring opening dissociation of cationic twisted conformer by conformer-specific cyclopentanone photoionization</b><br>
+  Y. R. Lee, M. H. Kim, and C. H. Kwon<sup>*</sup><br>
+   <i>J. Chem. Phys.</i> <b>151</b>, 164305 (2019).</span> </p>  <br>    
+ 
+ 
+        
+  <p><b>45. Formyl torsion and cationic structure of gauche conformer in isobutanal by conformer-specific VUV-MATI spectroscopy and Franck-Condon fitting</b><br>
+  Y. R. Lee, K. E. Kim, M. H. Kim, H. L. Kim, and C. H. Kwon<sup>*</sup> <br>
+   <i>J. Chem. Phys.</i> <b>151</b>, 014304 (2019). </span> </p> <br>  
+       
+ 
+  
+  <p><b>44. Conformational preference and cationic structure of 2-methylpyrazine by VUV-MATI spectroscopy and natural bond orbital analysis</b><br>
+  D. W. Kang, H. L. Kim,<sup>*</sup> and C. H. Kwon<sup>*</sup><br>
+  <i>Phys. Chem. Chem. Phys.</i> <b>21</b>, 9255-9264 (2019) <br>
+  -This article has been selected as a 2019 HOT PCCP Articles. </span> </p>  <br>
+      
+ 
+        
+  <p><b>43. Surface-catalyzed photodissociation of (E)-4',4'''-(diazene-1, 2-diyl)bis(([1,1'-biphenyl]-4-carbonitrile)) investigated by surface-enhanced Raman scattering and quantum chemical calculations</b><br>
+  S. Y. Eom, S. H. Han, P. H. Lee, H. L. Kim, and C. H. Kwon<sup>*</sup><br>
+  <i>J. Phys. Chem. C</i> <b>123</b>, 7142-7150 (2019). </span> </p> <br>
+        
+ 
+  
+  <p><b>42. Identification and composition of conformational isomers and their cations in crotonaldehyde by VUV-MATI spectroscopy</b><br>
+  S. M. Park, H. L. Kim,<sup>*</sup> and C. H. Kwon<sup>*</sup><br>
+  <i>Phys. Chem. Chem. Phys.</i> <b>20</b>, 27162-27168 (2018). </span> </p>  <br>
+      
+ 
+  
+  <p><b>41. Conformer-specific photoionization and conformational stabilities of isobutanal revealed by one-photon mass-analyzed threshold ionization (MATI) spectroscopy</b><br>
+  Y. R. Lee, M. H. Kim, H. L. Kim, and C. H. Kwon<sup>*</sup><br>
+  <i>J. Chem. Phys.</i> <b>149</b>, 174302 (2018). </span> </p>   <br>  
+
+ 
+  
+  <p><b>40. Photodissociation dynamics of benzaldehyde-<i>d</i><sub>5</sub> at 205 nm: The H atom production channel</b><br>
+  S. M. Park, S. H. Yoon, C. H. Kwon, and H. L. Kim<sup>*</sup><br>
+  <i>J. Phys. Chem. A</i> <b>122</b>, 773-779 (2018). </span> </p>  <br>
+             
+ 
+  
+  <p><b>39. Conformational structures of the tetrahydrofuran cation determined using one-photon mass-analyzed threshold ionization spectroscopy</b><br>
+  S. M. Park, Y. R. Lee, D. W. Kang, H. L. Kim,<sup>*</sup> and C. H. Kwon<sup>*</sup><br>
+  <i>Phys. Chem. Chem. Phys.</i> <b>19</b>, 30362-30369 (2017) <br>
+  -This article has been a part of the 2017 PCCP HOT Articles.</span> </p>  <br>      
+
+ 
+  
+  <p><b>38. Observation of the ring-puckering vibrational mode in thietane cation</b><br>
+  Y. R. Lee, C. B. Park, J. Hwang, B. J. Sung, H. L. Kim,<sup>*</sup> and C. H. Kwon<sup>*</sup><br>
+  <i>J. Phys. Chem. A</i> <b>121</b>, 1163-1167 (2017). </span> </p>  <br>
+ 
+ 
+  
+  <p><b>37. Surface-enhanced Raman scattering of 2,2'-biphenyl dicarboxylic acid on silver surfaces: Structure and orientation upon adsorption</b><br>
+  S. Y. Eom, Y. R. Lee, C. H. Kwon, and H. L. Kim<sup>*</sup><br>
+  <i>J. Mol. Struct.</i> <b>1115</b>, 70-74 (2016). </span> </p>  <br>
+        
+ 
+        
+  <p><b>36. Determination of the accurate ionization energy and cationic structure of cyanopyrazine by one-photon mass-analyzed threshold ionization spectroscopy</b><br>
+  D. W. Kang, H. L. Kim,<sup>*</sup> and C. H. Kwon<sup>*</sup><br>
+  <i>Int. J. Mass Spectrom.</i> <b>397-398</b>, 52-57 (2016). </span> </p>  <br>    
+ 
+ 
+  
+  <p><b>35. Dynamics of H atom production from photodissociation of acetic acid-d<sub>1</sub></b><br>
+  S. M. Park, C. H. Kwon,<sup>*</sup> and H. L. Kim<sup>*</sup><br>
+  <i>J. Phys. Chem. A</i> <b>119</b>, 9474-9480 (2015). </span> </p> <br>
+ 
+ 
+  
+  <p><b>34. One-photon mass-analyzed threshold ionization (MATI) spectroscopy of pyridine: Determination of accurate ionization energy and cationic structure</b><br>
+  Y. R. Lee, D. W. Kang, H. L. Kim,<sup>*</sup> and C. H. Kwon<sup>*</sup><br>
+  <i>J. Chem. Phys.</i> <b>141</b>, 174303 (2014). </span> </p>  <br>
+
+  
+  
+  <p><b>33. Adsorption characteristics and structure of 4,4'-bis(mercaptomethyl) biphenyl on silver by surface-enhanced Raman scattering and density
+  functional theory calculations</b><br>
+      S. Y. Eom, Y. R. Lee, H. L. Kim,<sup>*</sup> and C. H. Kwon<sup>*</sup><br>
+  <i>Bull. Korean Chem. Soc.</i> <b>35</b>, 875-880 (2014)<br>
+  This paper is to commemorate Professor Myung Soo Kim's honourable retirement.</span> </p>  <br>
+       
+  
+  
+  <p><b>32. Dynamics of H atom production from photodissociation of H<sub>2</sub>O<sub>2</sub> at 205 nm</b><br>
+  S. M. Park, C. M. Kang, C. H. Kwon,<sup>*</sup> and H. L. Kim<sup>*</sup><br>
+  <i>Chem. Phys. Lett.</i> <b>592</b>, 124-126 (2014). </span> </p>  <br>
+       
+  
+  
+  <p><b>31. Determination of precise pyrimidine cationic structure by vacuum ultraviolet mass-analyzed threshold ionization spectroscopy</b><br>
+  J. H. Kim, J. H. Lee, H. Hwang, H. L. Kim,<sup>*</sup> and C. H. Kwon<sup>*</sup><br>
+  <i>Phys. Chem. Chem. Phys.</i> <b>16</b>, 1590-1596 (2014). </span> </p>  <br>
+       
+  
+  
+  <p><b>30. SERS and DFT study of 4,4'-biphenyl dicarboxylic acid on silver surfaces: The orientation and vibrational assignment</b><br>
+  Y. R. Lee, S. Y. Eom, H. L. Kim, and C. H. Kwon<sup>*</sup><br>
+  <i>J. Mol. Struct.</i> <b>1050</b>, 128-132 (2013). </span> </p>  <br>  
+      
+  
+  
+  <p><b>29. Systematic preparation of colloidal silver nanoparticles for effective SERS substrates</b><br>
+  S. Y. Eom, S. L. Ryu, H. L. Kim, and C. H. Kwon<sup>*</sup><br>
+  <i>Colloids Surf. A</i> <b>422</b>, 39-43 (2013). </span> </p> <br>
+      
+  
+  
+  <p><b>28. Ionization energy of acetone by vacuum ultraviolet mass-analyzed threshold ionization spectrometry</b><br>
+  J. H. Kim, D. W. Kang, Y. J. Hong, H. Hwang, H. L. Kim, and C. H. Kwon<sup>*</sup><br>
+  <i>Hyperfine Interact.</i> <b>216</b>, 85-88 (2013). </span> </p>  <br>
+         
+ 
+  
+  <p><b>27. Surface-enhanced Raman scattering and DFT study of 4,4'-biphenyldithiol on silver surface.</b><br>
+  Y. R. Lee, M. S. Kim, and C. H. Kwon<sup>*</sup><br>
+  <i>Bull. Korean Chem. Soc.</i> <b>34</b>, 470-474 (2013).</span> </p>  <br>
+        
+  
+  
+  <p><b>26. Photodissocaition dynamics of propiolic acid at 212 nm: The OH production channel</b><br>
+  M. S. Shin, J. H. Lee, H. Hwang, C. H. Kwon, and H. L. Kim<sup>*</sup><br>
+  <i>Bull. Korean Chem. Soc.</i> <b>33</b>, 3618-3624 (2012). </span> </p>  <br>
+        
+  
+  
+  <p><b>25. Characteristics of damage on photosensor irradiated by intense illumination: Thermal diffusion model</b><br>
+  C. H. Kwon,<sup>*</sup> M. S. Shin, H. Hwang, H. L. Kim, S. Kim, and M. K. Park<br>
+      <i>J. Kor. Inst. Mil. Sci. Technol.</i> <b>15</b>, 201-207 (2012). </span> </p>  <br>
+       
+  
+  
+  <p><b>24. Potential of mean force calculations for ion selectivity in a cyclic peptide nanotube.</b><br>
+  K. -M. Choi, C. H. Kwon, H. L. Kim, and H. Hwang<sup>*</sup><br>
+  <i>Bull. Korean Chem. Soc.</i> <b>33</b>, 911-916 (2012).</span> </p>  <br>
+       
+  
+  
+  <p><b>23. Dynamics of H atom production from photodissociation of formic acid at 205 nm</b><br>
+  C. H. Kwon, M. H. Choi, H. Hwang, and H. L. Kim<sup>*</sup><br>
+  <i>Bull. Korean Chem. Soc.</i> <b>33</b>, 728-730 (2012). </span> </p>  <br>
+        
+  
+  
+  <p><b>22. Nonequilibrium Molecular Dynamics Simulation Study of Kinetic Energy and Velocity Distribution
+  Profiles of Argon Gases in Shock Waves.</b><br>
+  H. Hwang,<sup>*</sup> J. H. Lee, C. H. Kwon, H. L. Kim, S. Kim, and M. K. Park<br>
+  <i>J. Kor. Inst. Mil. Sci. Technol.</i> <b>14</b>, 147-153 (2011). </span> </p>  <br>
+        
+  
+  
+ <p><b>21. Photodissociation dynamics of allyl alcohol in UV: The exit channel barrier for OH production</b><br>
+  J. H. Lee, T. Y. Kang, C. H. Kwon, H. Hwang, and H. L. Kim<sup>*</sup><br>
+  <i>Bull. Korean Chem. Soc.</i> <b>32</b>, 510-514 (2011). </span> </p>  <br>
+
+  
+  
+ <p><b>20. Photodissociation dynamics of propargyl alcohol at 212nm: The OH production channel</b><br>
+  J. H. Lee, H. Hwang, C. H. Kwon, and H. L. Kim<sup>*</sup><br>
+  <i>J. Phys. Chem. A</i> <b>114</b>, 2053-2058 (2010). </span> </p>  <br>
+               
+  
+  
+  <p><b>19. Development and application of a nonequilibrium molecular dynamics simulation method to study shock waves
+  propagating in argon gas</b><br>
+  H. Hwang,<sup>*</sup> C. H. Kwon, H. L. Kim, S. Kim, and M. K. Park<br>
+  <i>J. Kor. Inst. Mil. Sci. Technol.</i> <b>13</b>, 156-163 (2010). </span> </p>  <br>        
+ 
+  
+  
+   <p><b>18. Photodissociation dynamics of cyanamide at 193 nm: The CN radical production channel</b><br>
+  J. H. Lee, T. Y. Kang, H. Hwang, C. H. Kwon, and H. L. Kim<sup>*</sup><br>
+  <i>Bull. Korean Chem. Soc.</i> <b>29</b>, 1685-1688 (2008). </span> </p>  <br>
+
+  
+  
+  <p><b>17. Quantitative analysis of x-ray absorption spectra using a 2D map representation</b><br>
+  H. C. Choi, S. Lee, K. K. Lee, I. Noda, C. Park, C. H. Kwon, and Y. M. Jung<sup>*</sup><br>
+  <i>Spectrochim. Acta Part A</i> <b>69</b>, 1110-1113 (2008). </span> </p>  <br>
+ 
+  
+  
+  <p><b>16. Photodissociation dynamics of cyanamide at 212 nm</b><br>
+  C. H. Kwon, J. H. Lee, and H. L. Kim<sup>*</sup><br>
+  <i>Bull. Korean Chem. Soc.</i> <b>28</b>, 1485-1488 (2007). </span> </p>  <br>
+
+  
+  
+  <p><b>15. A new and efficient one-pot synthesis of aromatic alkynyl ketones from aromatic esters</b><br>
+  S. J. Yim, C. H. Kwon, and D. K. An<sup>*</sup><br>
+  <i>Tetrahedron Lett.</i> <b>48</b>, 5393-5395 (2007).</span> </p>  <br>
+       
+  
+  
+ <p><b>14. Development of a pulsed mixing source for bimolecular reaction</b><br>
+  C. H. Kwon<br>
+  <i>Bull. Korean Chem. Soc.</i> <b>28</b>, 181-182 (2007). </span> </p>  <br>
+        
+  
+  
+ <p><b>13. Mode- and bond-selective reaction of Cl (<sup>2</sup>P<sub>3/2</sub>) with CH<sub>3</sub>D: C-H stretch overtone excitation near 6000 cm<sup>-1</sup></b><br>
+  R. J. Holiday, C. H. Kwon, C. J. Annesley, and F. F. Crim<sup>*</sup><br>
+  <i>J. Chem. Phys.</i> <b>125</b>, 133101 (2006). </span> </p>  <br>
+ 
+  
+  
+ <p><b>12. One-photon mass-analyzed threshold ionization spectroscopy of 1,3,5-trifluorobenzene: The Jahn-Teller effect and vibrational analysis for the molecular cation in the ground electronic state.</b><br>
+  C. H. Kwon and M. S. Kim<sup>*</sup><br>
+  <i>J. Chem. Phys.</i> <b>121</b>, 2622-2629 (2004).</span> </p>  <br>
+              
+  
+  
+  <p><b>11. Vacuum ultraviolet mass-analyzed threshold ionization spectroscopy of hexafluorobenzene: The Jahn-Teller effect and vibrational analysis </b><br>
+  C. H. Kwon and M. S. Kim<sup>*</sup><br>
+  <i>J. Chem. Phys.</i> <b>120</b>, 11578-11585 (2004).</span> </p>  <br>
+        
+  
+  
+  <p><b>10. Vibrational analysis of one-photon mass-analyzed threshold ionization spectra of phenylacetylene and benzonitrile </b><br>
+  C. H. Kwon, H. L. Kim, and M. S. Kim<sup>*</sup><br>
+  <i>J. Phys. Chem. A</i> <b>107</b>, 10969-10975 (2003). </span> </p>  <br>      
+         
+  
+  
+  <p><b>9. Vacuum ultralviolet mass-analyzed threshold ionization spectroscopy of benzene: Vibrational analysis of C<sub>6</sub>H<sub>6</sub><sup>+</sup> and C<sub>6</sub>D<sub>6</sub><sup>+</sup> in the B<sup>2</sup>E<sub>2g</sub>state</b><br>
+  C. H. Kwon, H. L. Kim, and M. S. Kim<sup>*</sup><br>
+  <i>J. Chem. Phys.</i> <b>119</b>, 4305-4312 (2003). </span> </p>  <br>
+              
+  
+        
+  <p><b>8. Vacuum ultralviolet mass-analyzed threshold ionization spectroscopy of benzene: Vibrational analysis of C<sub>6</sub>H<sub>6</sub><sup>+</sup> and C<sub>6</sub>D<sub>6</sub><sup>+</sup>in the X<sup>2</sup>E<sub>1g</sub>state</b><br>
+  C. H. Kwon, H. L. Kim, and M. S. Kim<sup>*</sup><br>
+  <i>J. Chem. Phys.</i> <b>119</b>, 215-223 (2003). </span> </p>  <br>
+
+ 
+  
+  <p><b>7. Development of a coherent vacuum ultraviolet source at 104~108 nm generated by four wave sum frequency mixing in Hg vapor</b><br>
+  C. H. Kwon, H. L. Kim, and M. S. Kim<sup>*</sup><br>
+  <i>Rev. Sci. Instrum.</i> <b>74</b>, 2939-2941 (2003).</span> </p>  <br>       
+
+  
+    
+ <p><b>6. Vacuum ultralviolet mass-analyzed threshold ionization spectroscopy of <i>p</i>-, <i>m</i>-, and <i>o</i>-difluorobenzenes: 
+      Ionization energies and vibrational frequencies and structures of the cations</b><br>
+  C. H. Kwon, H. L. Kim, and M. S. Kim<sup>*</sup><br>
+  <i>J. Chem. Phys.</i> <b>118</b>, 6327-6335 (2003). </span> </p> <br>
+
+ 
+    
+  <p><b>5. Discovery of long-lived excited electronic states of chlorobenzene, bromobenzene, benzonitrile, and phenylacetylene cations</b><br>
+  Y. Y. Youn, C. H. Kwon, J. C. Choe, and M. S. Kim<sup>*</sup><br>
+  <i>J. Chem. Phys.</i> <b>117</b>, 2538-2545 (2002).</span> </p>  <br>
+
+ 
+       
+  <p><b>4. Vibrational spectra of halobenzene cations in the ground and B<sup>2</sup>B<sub>2</sub> electronic states obtained by one-photon mass-analyzed threshold ionization spectrometry</b><br>
+  C. H. Kwon, H. L. Kim, and M. S. Kim<sup>*</sup><br>
+  <i>J. Chem. Phys.</i> <b>116</b>, 10361-10371 (2002).</span> </p> <br>
+            
+ 
+  
+  <p><b>3. Charge exchange ionization in collision cells as a method to detect the presence of long-lived excited electronic states of polyatomic ions</b><br>
+  C. H. Kwon, M. S. Kim,<sup>*</sup> and J. C. Choe<br>
+  <i>J. Am. Soc. Mass Spectrom.</i> <b>12</b>, 1120-1126 (2001).</span> </p> <br>
+ 
+ 
+  
+  <p><b>2. Discovery of benzene cation in a very long-lived excited electronic state</b><br>
+  M. S. Kim,<sup>*</sup> C. H. Kwon, and J. C. Choe<br>
+  <i>J. Chem. Phys.</i> <b>113</b>, 9532-9539 (2000).</span> </p> <br> 
+          
+ 
+  
+   <p><b>1. Temperature dependence and annealing effects in surface-enhanced Raman scattering on chemically prepared silver island films</b><br>
+  C. H. Kwon, D. W. Boo, H. J. Hwang, and M. S. Kim<sup>*</sup><br>
+  <i>J. Phys. Chem. B</i> <b>103</b>, 9610-9615 (1999). </span> </p>  <br>
+           <h3 class="text-align: left;">PATENTS</h3>
+ <p><b>3. Preparation method of silver nano-structure for surface enhanced Raman scattering substrate and silver nano-structure thereby,</b><br>
+C. H. Kwon, S. Y. Eom, H. L. Kim <br>
+US patent, <b>Application:</b> 14/043,074, 2013.10.01, <b>US patent:</b> #9249481, 2016.02.02</span></p>
+      
+<p><b>2. 표면증강라만산란라만산란 기질용 은 나노 구조체 </b> <br>
+        권찬호, 엄소영, 김홍래 <br>
+        대한민국 특허, <b>출원:</b> #10-2014-0010393, 2014. 01. 28, <b>등록:</b> 제10-1456175호, 2014.10.23</span></p>
+
+     
+<p><b>1. 표면증강라만산란 기질용 은 나노 구조체의 제조방법 및 이에 따른 은 나노 구조체 </b> <br>
+        권찬호, 엄소영, 류세림, 김홍래 <br>
+    대한민국 특허, <b>출원:</b> #2012-0093815호, 2012. 08. 27, <b>등록:</b> 제10-1397552, 2014.05. 14</span></p>
+
+ <h3 class="text-align: left;">BOOKS</h3>
+ <P>9. 일반화학실험: 권찬호외 6명, 자유아카데미, 2022.02</P>
+ <P>8. 화학세계 9월호, "적외선 공명 고분해능 질량 분광법을 이용한 분자 내 개별 이형태체들의 구조 연구": 권찬호외 4명, 대한화학회, 2021.09</P>
+<P>7. 대학화학 제5판: 권찬호외 4명, 자유아카데미, 2021.02</P>
+<P>6. 대학화학 제4판: 권찬호외 4명, 자유아카데미, 2018.02</P>
+<P>5. 대학화학 제3판: 권찬호외 4명, 자유아카데미, 2015.02</P>
+<P>4. 대학화학 제2판: 권찬호외 4명, 자유아카데미, 2013.02</P>
+<P>3. 대학화학: 물질의 본질과 변화, 김홍래 외 6명, 자유아카데미, 2010.02</P>
+<P>2. 일반화학 제5판, 권찬호 외 28명, 자유아카데미, 2008.02</P>
+<p>1. 일반화학, 권찬호 외 5명, 자유아카데미, 2007.02</p>
+
+ <h3 class="text-align: left;">PRESENTATIONS</h3>
+
+ <p> 38. Study on structures of individual conformers by IR depletion/dip VUV-MATI spectroscopy.<br>
+  Sung Man Park and Chan Ho Kwon*<br>
+  127th General Meeting of the Korean Chemical Society, 2021</span></p> 
+                                                                                   
+ 
+  <p>37. Conformer-specific VUV-MATI spectroscopy of the s-trans and s-cis conformers in methyl vinyl ketone conformers in methyl vinyl ketone.<br>
+  Sung Man Park and Chan Ho Kwon*<br>
+  4th Asian Workshop on Molecular Spectroscopy, 2021</span></p> 
+                                                                 
+ 
+ <p> 36. One-photon VUV-MATI and two-photon IR+VUV-MATI spectroscopic determination of oxetane cation ring-puckering vibrations and conformation.<br>
+  Do Won Kang, Sung Man Park, Hong Lae Kim, and Chan Ho Kwon*<br>
+  4th Asian Workshop on Molecular Spectroscopy, 2021</span></p> 
+                                               
+ 
+ <p> 35. VUV-MATI spectroscopy towards conformational chemistry.<br>
+  Chan Ho Kwon*<br>
+  126th General Meeting of the Korean Chemical Society, 2020</span></p> 
+                                                
+ 
+ <p> 34. Conformational stability and cationic structure of piperidine by conformer-specific VUV-MATI spectroscopy.<br>
+  So Young Eom, Yu Ran Lee, and Chan Ho Kwon*<br>
+  2020 Korean Society for Mass Spectrometry Summer Conference, 2020</span></p> 
+                                                                                                                                                                               
+ 
+<p>  33. Implementation of Mass Spectrometry for Molecular Ion Spectroscopy.<br>
+  Yu Ran Lee, Sung Man Park, and Chan Ho Kwon*<br>
+  2020 Korean Society for Mass Spectrometry Summer Conference, 2020</span></p> 
+                                                                                                                               
+ 
+ <p> 32. Development of Cutting-edge Mass Spectroscopic Techniques and Their Applications.<br>
+  Yu Ran Lee, Sung Man Park, Chan Ho Kwon*<br>
+  124th General Meeting of the Korean Chemical Society, 2019</span></p> 
+                               
+ 
+  <p>31. Identification of conformers and their cations by high-resolution VUV-MATI spectroscopy.<br>
+  Chan Ho Kwon*<br>
+  2019 International Manchester Symposium, 2019</span></p> 
+                                      
+ 
+ <p> 30. Identification of conformers and their cations in aldehydes by high resolution VUV-MATI spectroscopy.<br>
+  Chan Ho Kwon*<br>
+  2018 FRENCH-KOREAN SYMPOSIUM, 2018</span></p> 
+                                 
+ 
+<p>  29. Conformational structures of heterocyclic molecular cations investigated by high-resolution VUV-MATI spectroscopy.<br>
+  Chan Ho Kwon*<br>
+  121st General Meeting of the Korean Chemical Society, 2018</span></p> 
+                          
+ 
+<p>  28. Conformer-specifinc vibrational spectroscopy of molecular cations byhigh-resolution VUV-MATI technique.<br>
+  Yu Ran Lee, Hong Lae, and Chan Ho Kwon*<br>
+  120th General Meeting of the Korean Chemical Society, 2017</span></p> 
+                    
+ 
+<p>  27. Effect of chloride ion in photoreaction of 4-aminobenzoic acid on silver surface investigated by the SERS spectroscopy and the DFT calculation.<br>
+  Do Keun Yoon, Hong Lae Kim, and Chan Ho Kwon*<br>
+  2nd Asian Workshop on Molecular Spectroscopy, 2017</span></p> 
+             
+
+<p>  26. Conformational structures of thietane and tetrahydrofuran cations investigated by VUV-MATI spectroscopy.<br>
+  Chan Ho Kwon<br>
+  The 21st East Asian Workshop on Chemical Dynamics, 2017</span></p> 
+      
+ 
+  <p>25. Conformer-specific ion spectroscopy of isobutanal.<br>
+  Yu Ran Lee, Hong Lae Kim, and Chan Ho Kwon*<br>
+  1st Asian Workshop on Molecular Spectroscopy, 2017</span></p> 
+       
+ 
+<p>  24. Orientation change and structure according to the various pH conditions of4-amino-4’-cyanobiphenyl on silver surfaces: SERS and DFT study.<br>
+  So Young Eom, Hong Lae Kim, and Chan Ho Kwon*<br>
+  1st Asian Workshop on Molecular Spectroscopy, 2017</span></p> 
+       
+ 
+<p>23. One-photon vacuum ultraviolet mass-analyzed threshold ionization(VUV-MATI) spectroscopy of crotonaldehyde.<br>
+  Sung Man Park, Hong Lae Kim, and Chan Ho Kwon*<br>
+  1st Asian Workshop on Molecular Spectroscopy, 2017</span></p> 
+           
+ 
+<p>  22. Vacuum Ultraviolet Mass-Analyzed Threshold Ionization Spectroscopy of Tetrahydrofuran.<br>
+  Sung Man Park, Hong Lae Kim, and Chan Ho Kwon*<br>
+  1st Asian Workshop on Molecular Spectroscopy, 2017</span></p> 
+      
+ 
+<p>  21. One-photon mass-analyzed threshold ionization (MATI) spectroscopy ofthietane cation.<br>
+  Yu Ran Lee, Hong Lae Kim, and Chan Ho Kwon*<br>
+  1st Asian Workshop on Molecular Spectroscopy, 2017</span></p> 
+      
+
+ <p> 20. Vacuum ultraviolet mass-analyzed threshold ionization spectroscopy of hydrazoic acid (HN<sub>3</sub>).<br>
+  Do Won Kang, Hong Lae Kim, and Chan Ho Kwon*<br>
+  1st Asian Workshop on Molecular Spectroscopy, 2017</span></p> 
+      
+
+ <p> 19. Conformer-specific VUV-MATI spectroscopy of isobutanal.<br>
+  Chan Ho Kwon<br>
+  The 20th East Asian Workshop on Chemical Dynamics, 2016</span></p> 
+      
+ 
+<p>18. Accurate ionization energies and cationic structures of polyatomic molecules by high-resolution ion spectroscopy.<br>
+  Chan Ho Kwon<br>
+  The 19th East Asian Workshop on Chemical Dynamics, 2015</span></p> 
+
+ 
+   <p>  17. Accurate ionization energy and cationic structures of pyridine.<br>
+  Chan Ho Kwon<br>
+  IUPAC 48th General Assembly and 45th World Chemistry Congress, 2015</span></p>
+      
+ 
+    <p> 16. Vacuum ultraviolet mass-analyzed threshold ionization (VUV-MATI) spectroscopy of tetrahydrofuran: Equilibrium configuration and Franck-Condon simulation.<br>
+  Sung Man Park, Do Won Kang, Hong Lae Kim, and Chan Ho Kwon*<br>
+  IUPAC 48th General Assembly and 45th World Chemistry Congress, 2015</span></p>
+      
+ 
+  <p>   15. Vacuum ultraviolet mass-analyzed threshold ionization spectroscopy of Oxetane.<br>
+  Do Won Kang, Hong Lae Kim, and Chan Ho Kwon*<br>
+  IUPAC 48th General Assembly and 45th World Chemistry Congress, 2015</span></p>
+       
+ 
+   <p>  14. Controlling the orientation of 4-amino-4'-cyanobiphenyl on metal surface with the pH condition: SERS and DFT studies.<br>
+  So Young Eom, Hong Lae Kim, and Chan Ho Kwon*<br>
+  IUPAC 48th General Assembly and 45th World Chemistry Congress, 2015</span></p>
+                 
+ 
+   <p>  13. Ring-puckering vibration and ionization energy of thietane by high-resolution VUV-MATI spectroscopy.<br>
+  Yu Ran Lee, Hong Lae Kim, and Chan Ho Kwon*<br>
+  IUPAC 48th General Assembly and 45th World Chemistry Congress, 2015</span></p>
+      
+ 
+  <p>   12. Determination of Accurate Ionization Energies and Cationic Structures of Pyridine and 2-Fluoropyridine.<br>
+  Yu Ran Lee, Do Won Kang, Hong Lae Kim, Chan Ho Kwon*<br>
+  27th International Conference on Photochemistry, 2015</span></p>
+   
+ 
+<p> 11. Dynamics of H atom Production Channels from Photodissociation of Hydrogen peroxide, Acetic acid, and Trifluoroacetic acid at 205 nm.<br>
+  Sung Man Park, Chan Ho Kwon*, Hong Lae Kim*<br>
+  27th International Conference on Photochemistry, 2015</span></p>
+
+ 
+  <p>   10. One-photon Mass-analyzed Threshold Ionization Spectroscopy of Oxetane.<br>
+  Do Won Kang, Yu Ran Lee, Hong Lae Kim, Chan Ho Kwon*<br>
+  27th International Conference on Photochemistry, 2015</span></p>
+            
+ 
+   <p>  9. Accurate ionization energy and cationic structure of azabenzene.<br>
+  Yu Ran Lee, Do Won Kang, Hong Lae Kim, and Chan Ho Kwon*<br>
+  Korea-Japan Collaboration workshop on spectroscopic study on molecular structure and dynamics, 2015</span></p>
+     
+ 
+  <p>   8. One-photon mass-analyzed threshold ionization spectroscopy of pyridine using vacuum ultraviolet (VUV) radiation.<br>
+  Yu Ran Lee, Do Won Kang, Hong Lae Kim, Chan Ho Kwon*<br>
+  Korean-French symposium shining light on molecular structure, 2014</span></p>
+     
+ 
+   <p>  7. Determination of accurate ionization energy and cationic structure of pyrimidine by VUV-MATI spectroscopy.<br>
+  Chan Ho Kwon <br>
+  2014 Korea-Japan Symposium on Frontier Photoscience, 2014</span></p>
+      
+ 
+  <p>   6. Determination of pyridine cationic structures by one-photon mass-analyzed threshold ionization spectroscopy using vacuum ultraviolet laser.<br>
+  Chan Ho Kwon <br>
+  The 18th East Asian Workshop on Chemical Dynamics, 2014</span></p>
+
+ 
+  <p>   5. Vacuum ultraviolet mass-analyzed threshold ionization spectroscopy of azabenzenes.<br>
+  Chan Ho Kwon <br>
+  2013 Korea-France Joint Symposium, 2013</span></p>
+ 
+
+<p>4. Vibrational spectra and structures of azabenzene cations by vacuum ultraviolet mass-analyzed threshold ionization (VUV-MATI) spectroscopy.<br>
+  Hong Lae Kim and Chan Ho Kwon<br>
+  The 15th Japan-Korea Molecular Science Symposium, 2013</span></p>
+       
+ 
+  <p>   3. Vacuum ultraviolet mass-analyzed threshold Ionization spectrum of acetone.<br>
+  Chan Ho Kwon*, Hyonseok Hwang, Hong Lae Kim, and Yong Jun Hong<br>
+  The 6th International Conference on Laser Probing (LAP2012), 2012</span></p>
+      
+
+  <p>   <b>2. Symposium on Gas-phase Laser Spectroscopy and Reaction Dynamics, 2011~Present</b></span><o:p></o:p></p> 
+      
+
+<p>     <b>1. Annual Meeting of the Korean Chemical Society, 1998~Present</b></span><o:p></o:p></p>
+
+               </div>
+    </div>
+
+
+
+    <!-- 🔹 푸터 추가 -->
+    <div class="footer">
+        <p class="address">강원도 춘천시 강원대학길 1 자연과학대학 화학과 자1-311호</p>
+        <p class="copyright">Copyright(C) 2016 by <span class="lab-name">Mass Spectroscopy Lab</span>. All Rights Reserved.</p>
+        <p><a href="mailto:someone@example.com">mailto</a></p>
+    </div>
+
+</body>
+</html>

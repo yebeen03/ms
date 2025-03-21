@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mass Spectroscopy Laboratory</title>
+    <style>
+        body {
+            margin-left: 0;
+            font-family: 'Arial', sans-serif;
+            color: white;
+            text-align: left;
+            padding: 0;
+            background-color: #FAFAF8 !important;
+            display: block;
+            width: 100%;
+        }
+
+        /* 푸터 설정: 스크롤 후 맨 아래에서 보이게 함 */
+        .footer {
+            height: 80px;
+            position: relative;
+            bottom: -60px; /* 기본적으로 페이지 아래에 숨겨둠 */
+            left: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #E9E8E8;
+            border-top: 1px solid #E9E8E8;
+            padding: 10px;
+            font-size: 14px;
+            color: black;
+            text-align: center;
+            transition: bottom 0.5s ease-in-out; /* 스크롤 끝까지 내리면 부드럽게 나타나게 설정 */
+        }
+
+        /* 푸터 내용 설정 */
+        .footer small {
+            color: black;
+            font-size: 10px;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+        .footer .address {
+            margin-bottom: 5px;
+            color: purple;
+        }
+
+        .footer .lab-name {
+            color: purple;
+        }
+
+        .footer .address span {
+            color: purple;
+            font-size: 10px;
+        }
+
+        .footer .copyright {
+            color: black;
+            margin: 0;
+        }
+
+        .footer a {
+            color: black;
+            text-decoration: none;
+        }
+
+  
+
+        .header h1 {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 36px; /* h1 글씨 크기를 36px로 설정 */
+            margin-bottom: 70px;
+        }
+
+        h3 {
+            font-size: 30px; /* h3 글씨 크기 */
+            font-weight: bold; /* 글씨 두껍게 */
+            color: black; /* 글씨 색을 어두운 파란색으로 설정 */
+            margin-top: 20px; /* 위쪽 여백 추가 */
+            text-decoration: underline; /* 밑줄 추가 */
+            text-underline-position: under;
+        }           
+
+        .header h2 {
+            position: relative;
+            z-index: 1; /* 배경 위로 올리기 */
+            font-size: 36px; /* h2 글씨 크기 조정 */
+            color: white; /* 글자 색 유지 */
+        }
+
+        /* 네비게이션 바 스타일 */
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #FAFAF8;
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 2px solid #D8D8D8;
+
+        }
+
+        .nav a {
+            color: #181C14;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-item:hover {
+            background-color: #E9E8E8;
+            color: darkblue;
+        }
+
+        .nav-item.active {
+            background-color: #435585;
+            color: white;
+        }
+
+        .nav-item.active::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #435585;
+            z-index: -1;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 15px;
+            margin-left: auto;
+            margin-right: 40px;
+        }
+
+        /* 본문 내용 */
+        .content {
+            background-color: transparent !important;
+            color: #181C14;
+            padding: 80px 20px 20px;
+            min-height: 100vh;
+            text-align: left;
+            margin-left: 0;
+        }
+
+        .scroll-section {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            text-align: left;
+        }
+
+        h3 {
+            font-size: 30px;
+            line-height: 1.5;
+        }
+
+        p {
+            font-size: 20px;
+            line-height: 3.0;
+        }
+
+        .footer p {
+            font-size: 14px;
+            line-height: 1.2;
+        }
+
+.bordered-image {
+  border: 2px solid #D8D8D8; /* 테두리 두께와 색상 */
+  padding: 0px; /* 테두리와 이미지 간의 간격 */
+}
+
+@media screen and (max-width: 768px) {
+    .nav-container {
+        flex-direction: column; /* 모바일에서는 네비게이션을 세로 정렬 */
+        align-items: center;
+        padding: 15px 0;
+    }
+    </style>
+</head>
+<body>
+
+    <!-- 🔹 네비게이션 바 -->
+    <div class="nav-container">
+        <div class="logo">
+            <img src="https://github.com/yebeen03/mass/blob/main/%EB%A1%9C%EA%B3%A0%20%EB%B8%94%EB%9E%99.png?raw=true" alt="Lab Logo">
+        </div>
+        <div class="nav">
+            <a href="./home.html" class="nav-item home active">Home</a>
+            <a href="./PI.html" class="nav-item">PI</a>   
+            <a href="./lab.html" class="nav-item">Lab Intro</a>
+            <a href="./members.html" class="nav-item">Members</a>
+            <a href="./publication.html" class="nav-item">Publication</a>
+            <a href="./photos.html" class="nav-item">Photos</a>
+           
+
+        </div>
+    </div>
+
+    
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const navItems = document.querySelectorAll('.nav-item');
+        const currentPath = window.location.pathname.split("/").pop().toLowerCase(); // 현재 파일명 소문자로 변환
+
+        console.log("현재 페이지:", currentPath); // 디버깅용 콘솔 출력
+
+        navItems.forEach(item => {
+            item.classList.remove('active'); // 모든 메뉴에서 active 제거
+
+            // 현재 페이지와 a 태그 href 값이 정확히 일치하는 경우 active 추가
+            if (item.getAttribute('href') && item.getAttribute('href').toLowerCase().includes(currentPath)) {
+                console.log("활성화된 메뉴:", item.textContent); // 디버깅용 콘솔 출력
+                item.classList.add('active');
+            }
+        });
+    });
+</script>
+
+
+    <div class="content">
+        
+             <h3 style="text-align: left; margin-left: 90px; margin-top: 30px;">Current Members</h3>
+
+<div style="display: flex; align-items: center; gap: 50px; margin-left: 150px; margin-top: 70px;">
+
+  <!-- 이미지 -->
+  <img src="https://cc.kangwon.ac.kr/~chkwon/Sung%20Man.jpg" class="bordered-image"
+       alt="Profile Image" style="width: 150px; height: auto;">
+
+  <div>
+    <!-- 이름 -->
+    <p class="name" style="font-weight: bold; font-size: 25px; color: #435585;
+ margin-top: 20px;">Dr. Sung Man Park</p>
+
+    <p class="name" style="font-size: 20px; color: #181C14; margin-top: -30px;">· Research Professor</p>
+
+    <!-- 이메일 -->
+    <p class="email" style="font-size: 16px; color: #181C14; margin-top: -30px; margin-left: 10px;"><a href="mailto: sm0404@kangwon.ac.kr">sm0404@kangwon.ac.kr</a></p>
+  </div>
+</div>
+
+
+<hr style="border: 1px solid #D8D8D8; width: 85%; margin-top: 30px; ">
+
+<div style="display: flex; align-items: center; gap: 50px; margin-left: 150px; margin-top: 30px; margin-bottom: 30px;">
+
+  <!-- 이미지 -->
+  <img src="https://cc.kangwon.ac.kr/~chkwon/2018%20Hyo%20Jung%20Kim.jpg" class="bordered-image"
+       alt="Profile Image" style="width: 150px; height: auto;">
+
+  <div>
+    <!-- 이름 -->
+    <p class="name" style="font-weight: bold; font-size: 25px; color: #435585;
+ margin-top: 20px;">Hyojung Kim</p>
+
+    <p class="name" style="font-size: 20px; color: #181C14; margin-top: -30px;">· Ph.D. Course</p>
+
+    <!-- 이메일 -->
+    <p class="email" style="font-size: 16px; color: #181C14; margin-top: -30px; margin-left: 10px;"><a href="mailto: hjkim4713@naver.com">hjkim4713@naver.com</a></p>
+  </div>
+</div>
+
+
+<hr style="border: 1px solid #D8D8D8; width: 85%; margin-top: 30px; ">
+
+<div style="display: flex; align-items: center; gap: 50px; margin-left: 150px; margin-top: 30px; margin-bottom: 30px;">
+
+  <!-- 이미지 -->
+  <img src="https://cc.kangwon.ac.kr/~chkwon/21%20Kim%20Minjung.jpg" class="bordered-image"
+       alt="Profile Image" style="width: 150px; height: auto;">
+
+  <div>
+    <!-- 이름 -->
+    <p class="name" style="font-weight: bold; font-size: 25px; color: #435585;
+ margin-top: 20px;">Minjung Kim</p>
+
+    <p class="name" style="font-size: 20px; color: #181C14; margin-top: -30px;">· M.S. Course</p>
+
+    <!-- 이메일 -->
+    <p class="email" style="font-size: 16px; color: #181C14; margin-top: -30px; margin-left: 10px;"><a href="mailto: awjd@kangwon.ac.kr">awjd@kangwon.ac.kr</a></p>
+  </div>
+</div>
+<hr style="border: 1px solid #D8D8D8; width: 85%; margin-top: 30px; ">
+
+</div>
+</div>
+
+<div style="display: flex; align-items: center; gap: 50px; margin-left: 170px; margin-top: 30px; margin-bottom: 30px;">
+
+  <!-- 이미지 -->
+  <img src="https://cc.kangwon.ac.kr/~chkwon/21%20Son%20Eunbeen.jpg" class="bordered-image"
+       alt="Profile Image" style="width: 150px; height: auto;">
+
+  <div>
+    <!-- 이름 -->
+    <p class="name" style="font-weight: bold; font-size: 25px; color: #435585;
+ margin-top: 20px;">Eunbeen Son</p>
+
+    <p class="name" style="font-size: 20px; color: #181C14; margin-top: -30px;">· M.S. Course</p>
+
+    <!-- 이메일 -->
+    <p class="email" style="font-size: 16px; color: #181C14; margin-top: -30px; margin-left: 10px;"><a href="mailto: eunbeen02@kangwon.ac.kr">eunbeen02@kangwon.ac.kr</a></p>
+  </div>
+</div>
+<hr style="border: 1px solid #D8D8D8; width: 85%; margin-top: 30px; ">
+
+</div>
+</div>
+ 
+<div style="display: flex; align-items: center; gap: 50px; margin-left: 170px; margin-top: 30px; margin-bottom: 30px;">
+
+  <!-- 이미지 -->
+  <img src="https://cc.kangwon.ac.kr/~chkwon/22%20Sung%20Ye%20Been.jpg" class="bordered-image"
+       alt="Profile Image" style="width: 150px; height: auto;">
+
+  <div>
+    <!-- 이름 -->
+    <p class="name" style="font-weight: bold; font-size: 25px; color: #435585;
+ margin-top: 20px;">Ye Been Sung </p>
+
+    <p class="name" style="font-size: 20px; color: #181C14; margin-top: -30px;">· Undergraduate</p>
+
+    <!-- 이메일 -->
+    <p class="email" style="font-size: 16px; color: #181C14; margin-top: -30px; margin-left: 10px;"><a href="mailto: kilsung566@gmail.com">kilsung566@gmail.com</a></p>
+  </div>
+</div>
+<hr style="border: 1px solid #D8D8D8; width: 85%; margin-top: 30px; ">
+<div style="display: flex; align-items: center; gap: 50px; margin-left: 170px; margin-top: 30px; margin-bottom: 30px;">
+
+  <!-- 이미지 -->
+  <img src="https://cc.kangwon.ac.kr/~chkwon/22%20Jin%20Yubin.png" class="bordered-image"
+       alt="Profile Image" style="width: 150px; height: auto;">
+
+  <div>
+    <!-- 이름 -->
+    <p class="name" style="font-weight: bold; font-size: 25px; color: #435585;
+ margin-top: 20px;">Yubin Jin </p>
+
+    <p class="name" style="font-size: 20px; color: #181C14; margin-top: -30px;">· Undergraduate</p>
+
+    <!-- 이메일 -->
+    <p class="email" style="font-size: 16px; color: #181C14; margin-top: -30px; margin-left: 10px;"><a href="mailto: jinyubin1223@naver.com">jinyubin1223@naver.com</a></p>
+  </div>
+</div>
+<hr style="border: 1px solid #D8D8D8; width: 85%; margin-top: 30px; ">
+<div style="display: flex; align-items: center; gap: 50px; margin-left: 170px; margin-top: 30px; margin-bottom: 30px;">
+
+  <!-- 이미지 -->
+  <img src="https://cc.kangwon.ac.kr/~chkwon/21%20Chae%20Sumin.jpg" class="bordered-image"
+       alt="Profile Image" style="width: 150px; height: auto;">
+
+  <div>
+    <!-- 이름 -->
+    <p class="name" style="font-weight: bold; font-size: 25px; color: #435585;
+ margin-top: 20px;">Sumin Chae </p>
+
+    <p class="name" style="font-size: 20px; color: #181C14; margin-top: -30px;">· Undergraduate</p>
+
+    <!-- 이메일 -->
+    <p class="email" style="font-size: 16px; color: #181C14; margin-top: -30px; margin-left: 10px;"><a href="mailto: cotnals0719@naver.com">cotnals0719@naver.com</a></p>
+  </div>
+</div>
+<hr style="border: 1px solid #D8D8D8; width: 85%; margin-top: 30px; ">
+<div style="display: flex; align-items: center; gap: 50px; margin-left: 170px; margin-top: 70px; margin-bottom: 70px;">
+
+  <!-- 이미지 -->
+  <img src="https://cc.kangwon.ac.kr/~chkwon/23%20Oh%20Seung%20I.png" class="bordered-image"
+       alt="Profile Image" style="width: 150px; height: auto;">
+
+  <div>
+    <!-- 이름 -->
+    <p class="name" style="font-weight: bold; font-size: 25px; color: #435585;
+ margin-top: 20px;">Seung I Oh </p>
+
+    <p class="name" style="font-size: 20px; color: #181C14; margin-top: -30px;">· Undergraduate</p>
+
+    <!-- 이메일 -->
+    <p class="email" style="font-size: 16px; color: #181C14; margin-top: -30px; margin-left: 10px;"><a href="mailto: osi040305@naver.com">osi040305@naver.com</a></p>
+  </div>
+</div>
+<hr style="border: 1px solid #D8D8D8; width: 85%; margin-top: 30px; ">
+<div style="display: flex; align-items: center; gap: 50px; margin-left: 170px; margin-top: 30px; margin-bottom: 30px;">
+
+  <!-- 이미지 -->
+  <img src="https://cc.kangwon.ac.kr/~chkwon/23%20Yubun%20Lee.jpg" class="bordered-image"
+       alt="Profile Image" style="width: 150px; height: auto;">
+
+  <div>
+    <!-- 이름 -->
+    <p class="name" style="font-weight: bold; font-size: 25px; color: #435585;
+ margin-top: 20px;">Yubin Lee </p>
+
+    <p class="name" style="font-size: 20px; color: #181C14; margin-top: -30px;">· Undergraduate</p>
+
+    <!-- 이메일 -->
+    <p class="email" style="font-size: 16px; color: #181C14; margin-top: -30px; margin-left: 10px;"><a href="mailto: dldbqls1625@naver.com">dldbqls1625@naver.com</a></p>
+  </div>
+</div>
+<hr style="border: 1px solid #D8D8D8; width: 85%; margin-top: 30px; ">
+<div style="display: flex; align-items: center; gap: 50px; margin-left: 170px; margin-top: 30px; margin-bottom: 30px;">
+
+  <!-- 이미지 -->
+  <img src="https://cc.kangwon.ac.kr/~chkwon/20%20Lee%20Hoo%20Young.jpeg" class="bordered-image"
+       alt="Profile Image" style="width: 150px; height: auto;">
+
+  <div>
+    <!-- 이름 -->
+    <p class="name" style="font-weight: bold; font-size: 25px; color: #435585;
+ margin-top: 20px;">Hoo Young Lee</p>
+
+    <p class="name" style="font-size: 20px; color: #181C14; margin-top: -30px;">· Undergraduate</p>
+
+    <!-- 이메일 -->
+    <p class="email" style="font-size: 16px; color: #181C14; margin-top: -30px; margin-left: 10px;"><a href="mailto: hyys31291@naver.com">hyys31291@naver.com</a></p>
+  </div>
+</div>
+<hr style="border: 1px solid #D8D8D8; width: 85%; margin-top: 30px; ">
+
+</div>
+   <div class="content">
+
+        <h3 class="text-align: left;" style="margin-left: 100px;">Alumni</h3>
+<table border="1" cellpadding="10" cellspacing="0" style="width: 80%; border-collapse: collapse; text-align: center; margin-left: 80px;">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Degree</th>
+            <th>Position</th>
+            <th>Department</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Yu Ran Lee</td>
+            <td>Ph.D.</td>
+            <td>Research Scientist</td>
+            <td>Forensic Chemistry Division, NFS</td>
+        </tr>
+        <tr>
+            <td>Jae-Han Kim</td>
+            <td>M.S.</td>
+            <td>Research</td>
+            <td>Pharmaceutical Research Lab., Chong Kun Dang Pharm</td>
+        </tr>
+        <tr>
+            <td>So Young Eom</td>
+            <td>Ph.D.</td>
+            <td>Research Professor</td>
+            <td>Department of Chemistry, Korea University</td>
+        </tr>
+        <tr>
+            <td>Do Won Kang</td>
+            <td>Ph.D.</td>
+            <td>Research Professor</td>
+            <td>Department of Chemistry, UNIST</td>
+        </tr>
+        <tr>
+            <td>Sung Man Park</td>
+            <td>Ph.D.</td>
+            <td>Research Professor</td>
+            <td>Institute for Molecular Science and Fusion Technology, Kangwon National University</td>
+        </tr>
+        <tr>
+            <td>Jin Cheol Lee</td>
+            <td>M.S.</td>
+            <td>Researcher</td>
+            <td>BL Process</td>
+        </tr>
+        <tr>
+            <td>Sang Hyuk Yoon</td>
+            <td>M.S.</td>
+            <td>Application Specialist</td>
+            <td>A division of Spectris Co., Ltd., Malvern Panalytical</td>
+        </tr>
+        <tr>
+            <td>Do Keun Yoon</td>
+            <td>Ph.D. Course</td>
+            <td>Researcher</td>
+            <td>Department of Specialty Chemicals, KRICT</td>
+        </tr>
+        <tr>
+            <td>Jae Hwan Choi</td>
+            <td>M.S.</td>
+            <td>Researcher</td>
+            <td>Korea High Tech Textile Research Institute (KOTERI)</td>
+        </tr>
+        <tr>
+            <td>Na Young Choi</td>
+            <td>M.S.</td>
+            <td>Researcher</td>
+            <td>AI Drug Discovery Lab, PharminoGen Inc.</td>
+        </tr>
+        <tr>
+            <td>Sang Eun Kim</td>
+            <td>M.S.</td>
+            <td>Researcher</td>
+            <td>KOTITI Testing & Research Institute</td>
+        </tr>
+        <tr>
+            <td>Hyojung Kim</td>
+            <td>M.S</td>
+            <td>Ph.D. course</td>
+            <td>Department of Chemistry, Kangwon National University</td>
+        </tr>
+    </tbody>
+</table>
+
+</div>
+</div>
+    <!-- 🔹 푸터 추가 -->
+
+    <div class="footer">
+        <p class="address">강원도 춘천시 강원대학길 1 자연과학대학 화학과 자1-311호</p>
+        <p class="copyright">Copyright(C) 2016 by <span class="lab-name">Mass Spectroscopy Lab</span>. All Rights Reserved.</p>
+        <p><a href="mailto:someone@example.com">mailto</a></p>
+    </div>
+
+</body>
+</html>
+
