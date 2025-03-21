@@ -228,6 +228,24 @@
             font-size: 14px;
             line-height: 1.2;
         }
+@media (max-width: 768px) {
+    .content p {
+        display: inline-block; /* 줄이 유지되도록 */
+    }
+}
+@media (max-width: 768px) {
+    .nav {
+        display: flex;
+        flex-direction: column; /* 네비게이션을 세로로 배치 */
+        align-items: center;
+        gap: 10px;
+    }
+}
+body {
+    overflow-x: auto !important; /* 가로 스크롤 가능하게 */
+}
+
+
     </style>
 </head>
 <body>
