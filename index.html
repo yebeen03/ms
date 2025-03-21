@@ -228,22 +228,25 @@
             font-size: 14px;
             line-height: 1.2;
         }
-@media (max-width: 768px) {
-    .content p {
-        display: inline-block; /* 줄이 유지되도록 */
-    }
-}
-@media (max-width: 768px) {
-    .nav {
-        display: flex;
-        flex-direction: column; /* 네비게이션을 세로로 배치 */
-        align-items: center;
-        gap: 10px;
-    }
-}
-body {
-    overflow-x: auto !important; /* 가로 스크롤 가능하게 */
-}
+
+        /* 모바일 메뉴 스타일 */
+        @media (max-width: 768px) {
+            .menu-button {
+                display: block;
+            }
+
+            .nav {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.9);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
 
 
     </style>
