@@ -262,13 +262,12 @@
         flex-direction: column;
         position: fixed;
         top: 0;
-        right: -250px; /* 기본적으로 화면 오른쪽 바깥에 숨김 */
+        right: -150px; /* 기본적으로 화면 오른쪽 바깥에 숨김 */
         width: 250px; /* 메뉴 너비 */
         height: 100vh; /* 전체 화면 높이 */
         background: rgba(30, 30, 30, 0.95); /* 배경색 변경 */
         padding-top: 60px;
         transition: right 0.3s ease-in-out;
-        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2); /* 오른쪽에 그림자 효과 */
         text-align: left; /* 메뉴 텍스트 왼쪽 정렬 */
         padding-left: 20px; /* 좌측 여백 추가 */
 }
@@ -292,7 +291,7 @@
         display: block;
         position: absolute;
         top: 5px;
-        right: 65px;
+        right: 15px;
         font-size: 30px;
         background: none;
         border: none;
@@ -455,15 +454,24 @@
 </script>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-    const menuBtn = document.querySelector('.menu-btn');
-    const nav = document.querySelector('.nav');
+        const menuBtn = document.querySelector('.menu-btn');
+        const nav = document.querySelector('.nav');
+        const body = document.querySelector('body');
+        const content = document.querySelector('.content');
+        
+        // 햄버거 버튼 클릭 시 네비게이션 열기/닫기
+        menuBtn.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            body.classList.toggle('nav-open');
+        });
 
-    menuBtn.addEventListener('click', () => {
-        nav.classList.toggle('active'); // 클릭 시 메뉴 열고 닫기
-    });
-});
-</script>
+        // 네비게이션 외부 클릭 시 닫기
+        document.addEventListener('click', (e) => {
+            if (!nav.contains(e.target) && !menuBtn.contains(e.target)) {
+                nav.classList.remove('active');
+                body.classList.remove('nav-open');
+            }
+        });</script>
 
 
     <div class="content">
