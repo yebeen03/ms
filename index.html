@@ -227,10 +227,74 @@
             line-height: 1.2;
         }
 
-.slide-container img {
-    width: 100%;  /* 가로 너비를 화면 전체로 설정 */
-    height: auto; /* 비율 유지하면서 크기 자동 조정 */
-    object-fit: cover; /* 이미지가 잘리지 않게 꽉 차도록 설정 */
+.menu-btn {
+    display: none; /* 기본적으로 숨겨두기 */
+    cursor: pointer;
+    font-size: 30px;
+    background: none;
+    border: none;
+    color: #181C14;
+}
+
+/* 네비게이션 메뉴 (기본적으로 PC에서 보이게) */
+.nav-menu {
+    display: flex; /* PC에서는 기본 네비게이션 표시 */
+    gap: 15px;
+}
+
+
+/* 모바일 (768px 이하)에서만 적용 */
+@media (max-width: 768px) {
+
+                .logo img {
+            height: 30px;
+            margin-left: 110px;
+        }
+
+    .nav {
+        display: none; /* 기본적으로 숨김 */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #FAFAF8;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .nav a {
+        color: white;
+        font-size: 24px;
+        padding: 15px;
+    }
+
+    .menu-btn {
+        display: block;
+        position: absolute;
+        top: 6px;
+        right: 80px;
+        z-index: 1001;
+        }
+    .nav-menu {
+        display: none; /* 모바일에서는 기본 네비게이션 숨김 */
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: -250px; /* 화면 밖으로 숨김 */
+        width: 250px;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.9);
+        padding-top: 60px;
+        transition: right 0.3s ease-in-out;
+    }
+
+    /* 네비게이션 메뉴 활성화 시 오른쪽에서 나타나도록 설정 */
+    .nav.active {
+        right: 0; /* 화면 안으로 들어옴 */
+    }
 }
 
     </style>
@@ -242,15 +306,17 @@
         <div class="logo">
             <img src="로고 블랙.png" alt="Lab Logo">
         </div>
+        <button class="menu-btn">☰</button> <!-- 햄버거 버튼 -->
         <div class="nav">
             <a href="./index.html" class="nav-item home active">Home</a>
             <a href="./PI.html" class="nav-item">PI</a>
             <a href="./lab.html" class="nav-item">Lab Intro</a>
             <a href="./members.html" class="nav-item">Members</a>
             <a href="./publication.html" class="nav-item">Publication</a>
-            <a href="./photos.html" class="nav-item">Group Photos</a>
+            <a href="./photos.html" class="nav-item">Photos</a>
         </div>
     </div>
+
 
     <!-- 🔹 슬라이드 이미지 -->
     <div class="header">
@@ -325,7 +391,17 @@
                 item.classList.add('active');
             }
         });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const menuBtn = document.querySelector('.menu-btn');
+    const nav = document.querySelector('.nav');
+
+    menuBtn.addEventListener('click', () => {
+        nav.classList.toggle('active'); // 클릭 시 메뉴 열고 닫기
     });
+});
 </script>
 
 
