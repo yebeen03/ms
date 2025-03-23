@@ -248,36 +248,58 @@
 
                 .logo img {
             height: 30px;
-            margin-left: 110px;
+            margin-left: 85px;
         }
 
+/* 모든 요소에 대해 좌우 스크롤 방지 */
+* {
+    overflow-x: hidden; /* 모든 요소에 대해 좌우 스크롤 방지 */
+    box-sizing: border-box; /* 모든 요소의 크기 계산에 padding, border 포함 */
+}
+
     .nav {
-        display: none; /* 기본적으로 숨김 */
+        display: none;
+        flex-direction: column;
         position: fixed;
         top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #FAFAF8;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-    }
+        right: -250px; /* 기본적으로 화면 오른쪽 바깥에 숨김 */
+        width: 250px; /* 메뉴 너비 */
+        height: 100vh; /* 전체 화면 높이 */
+        background: rgba(30, 30, 30, 0.95); /* 배경색 변경 */
+        padding-top: 60px;
+        transition: right 0.3s ease-in-out;
+        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2); /* 오른쪽에 그림자 효과 */
+        text-align: left; /* 메뉴 텍스트 왼쪽 정렬 */
+        padding-left: 20px; /* 좌측 여백 추가 */
+}
 
     .nav a {
-        color: white;
-        font-size: 24px;
-        padding: 15px;
+        color: white; /* 글자 색상 */
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 15px 0;
+        display: block;
+        transition: background 0.3s ease-in-out;
+    }
+
+    /* 메뉴가 활성화되면 보이도록 설정 */
+    .nav.active {
+        display: flex; /* 햄버거 버튼 클릭 시 나타남 */
     }
 
     .menu-btn {
         display: block;
         position: absolute;
-        top: 6px;
-        right: 80px;
-        z-index: 1001;
-        }
+        top: 5px;
+        right: 65px;
+        font-size: 30px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 1001;       
+}
+
     .nav-menu {
         display: none; /* 모바일에서는 기본 네비게이션 숨김 */
         flex-direction: column;
@@ -286,7 +308,7 @@
         right: -250px; /* 화면 밖으로 숨김 */
         width: 250px;
         height: 100vh;
-        background: rgba(0, 0, 0, 0.9);
+        background: #FAFAF8;
         padding-top: 60px;
         transition: right 0.3s ease-in-out;
     }
@@ -295,6 +317,45 @@
     .nav.active {
         right: 0; /* 화면 안으로 들어옴 */
     }
+        .header {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 1s ease-in-out;
+        }
+
+        
+        .header h2 {
+            font-size: 18px; /* h2 글씨 크기 조정 */
+            margin-top: -10px;
+            margin-left: -10px;
+
+        }
+
+        h1 {
+            font-size: 18px; /* h1 글씨 크기를 36px로 설정 */ 
+            margin-top: 70px;
+            margin-left: -10px;
+
+        }
+
+        h3 {
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        p {
+            font-size: 13px;
+            line-height: 3.0;
+        }
+
 }
 
     </style>
