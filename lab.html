@@ -235,22 +235,206 @@
             width: 250px; /* 개별 이미지 크기 고정 */
             margin-top: -20px;
         }
-@media screen and (max-width: 768px) {
-    .nav-container {
-        flex-direction: column; /* 모바일에서는 네비게이션을 세로 정렬 */
-        align-items: center;
+
+/* 모바일 (768px 이하)에서만 적용 */
+@media (max-width: 768px) {
+
+                .logo img {
+            height: 30px;
+            margin-left: 85px;
+        }
+
+/* 모든 요소에 대해 좌우 스크롤 방지 */
+* {
+    overflow-x: hidden; /* 모든 요소에 대해 좌우 스크롤 방지 */
+    box-sizing: border-box; /* 모든 요소의 크기 계산에 padding, border 포함 */
+}
+
+    .nav {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        height: 100vh; /* 전체 화면 높이 */
+        padding-top: 100px;
+        transition: right 0.3s ease-in-out;
+        text-align: left; /* 메뉴 텍스트 왼쪽 정렬 */
+        padding-left: 20px; /* 좌측 여백 추가 */
+}
+
+    .nav a {
+        color: black; /* 글자 색상 */
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: bold;
         padding: 15px 0;
+        display: block;
+        transition: background 0.3s ease-in-out;
     }
+
+    /* 메뉴가 활성화되면 보이도록 설정 */
+    .nav.active {
+        display: flex; /* 햄버거 버튼 클릭 시 나타남 */
+    }
+
+    .nav-item.active {
+        background-color: transparent; /* 배경색을 투명으로 설정 */
+        color: #435585;
+            text-decoration: underline; /* 텍스트에 밑줄 추가 */
+    text-underline-position: under; /* 밑줄의 위치를 텍스트 바로 아래로 설정 */
+    }
+
+
+    .menu-btn {
+        display: block;
+        position: absolute;
+        top: 5px;
+        right: 2px;
+        font-size: 30px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 1001;       
+}
+
+.menu-btn.active {
+    font-size: 25px; /* X의 크기를 크게 조정 */
+    position: relative;
+    top: 5px; /* X 아이콘의 위치를 위로 조정 */
+    left: 10px; /* X 아이콘을 왼쪽으로 이동 */
+    transform: rotate(90deg); /* X 모양을 비틀기 */
+    font-weight: normal; /* 기본 폰트 두께를 정상으로 설정 */
+    color: black;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5); /* 검은색 반투명 배경 */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 999; /* 네비 뒤로 오도록 설정 */
+}
+
+/* 네비게이션 바가 활성화되었을 때 */
+.nav-container.active {
+    background-color: rgba(0, 0, 0, 0.5); /* 배경을 검정색으로 */
+    border-bottom: 2px solid  rgba(0, 0, 0, 0.5);/* 아래 경계선 색을 검정색으로 변경 */
+
+}
+
+/* 작은 네모를 표시하는 스타일 */
+.nav-item.active::after {
+    display: none;
+}
+
+/* 네비가 활성화되면 오버레이도 보이게 */
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+    .nav-menu {
+        display: none; /* 모바일에서는 기본 네비게이션 숨김 */
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        margin-right: 0px; /* 화면 밖으로 숨김 */
+        width: 300px;
+        height: 100vh;
+        transition: right 0.3s ease-in-out;
+        z-index: 1000;
+    }
+
+/* 네비가 활성화될 때 */
+.nav-menu.active {
+    right: 0;
+}
+
+
+    /* 네비게이션 메뉴 활성화 시 오른쪽에서 나타나도록 설정 */
+    .nav.active {
+        right: 0; /* 화면 안으로 들어옴 */
+        margin-right: 0px;
+        background-color: #FAFAF8 !important;
+        text-align: left !important;
+        width: 300px;
+    }
+
+.nav.active .nav-item {
+    margin-top: -40px; /* 텍스트를 위로 올리기 */
+        font-size: 18px;
+        line-height: 3.0;
+
+}
+
+        h1 {
+            font-size: 18px; /* h1 글씨 크기를 36px로 설정 */ 
+            margin-top: 70px;
+            margin-left: -10px;
+
+        }
+
+        h3 {
+            font-size: 15px;
+            line-height: 1.5;
+            margin-left: 40px !important;
+            margin-top: 5px !important;
+        }
+
+        p {
+            font-size: 13px;
+            line-height: 3.0;
+            margin-left: 20px !important;
+            margin-top: 5px !important;
+        }
+
+        #img1 {
+            width: 300px !important;
+            height: auto; !important;
+            margin-left: 5px !important;
+        }
+
+        #text1 {
+            margin-left: 20px !important;
+        }
+
+        #img2 {
+            width: 300px !important;
+            height: auto; !important;
+            margin-left: 5px !important;
+        }
+
+        #text2 {
+            margin-left: 20px !important;
+            margin-top: 20px;
+        }
+        #text3 {
+            margin-left: 0px !important;
+            margin-top: 0px;
+            text-align: left;
+        }
+
+
+
+ }
 
     </style>
 </head>
 <body>
+<!-- 🔹 오버레이 추가 -->
+<div class="overlay"></div>
 
     <!-- 🔹 네비게이션 바 -->
     <div class="nav-container">
         <div class="logo">
             <img src="https://github.com/yebeen03/mass/blob/main/%EB%A1%9C%EA%B3%A0%20%EB%B8%94%EB%9E%99.png?raw=true" alt="Lab Logo">
         </div>
+        <button class="menu-btn">☰</button> <!-- 햄버거 버튼 -->
         <div class="nav">
             <a href="./index.html" class="nav-item home active">Home</a>
             <a href="./PI.html" class="nav-item">PI</a>
@@ -282,35 +466,99 @@
         });
     });
 </script>
+<script>
+const menuButton = document.querySelector('.menu-btn');
+const nav = document.querySelector('.nav');
+const overlay = document.querySelector('.overlay');
+const navContainer = document.querySelector('.nav-container');
+
+
+// 메뉴 버튼 클릭 시 네비와 오버레이 활성화
+menuButton.addEventListener('click', () => {
+    nav.classList.toggle('active');
+    overlay.classList.toggle('active');
+    navContainer.classList.toggle('active'); // 네비게이션 바 전체에 active 클래스 추가
+
+    menuButton.classList.toggle('active'); // 'active' 클래스를 추가하거나 제거하여 X로 바꾸기
+
+    console.log('active class toggled: ', menuButton.classList.contains('active'));
+
+    // 햄버거 버튼을 X로 변경 / 다시 햄버거로 변경
+    if (nav.classList.contains('active')) {
+        menuButton.textContent = '✖'; // 네비가 활성화되면 X로 변경
+    } else {
+        menuButton.textContent = '☰'; // 네비가 비활성화되면 햄버거로 변경
+    }
+});
+
+// 오버레이 클릭 시 네비 닫기
+overlay.addEventListener('click', () => {
+    nav.classList.remove('active');
+    overlay.classList.remove('active');
+    navContainer.classList.remove('active'); // active 클래스 제거
+    menuButton.textContent = '☰'; // 오버레이 클릭 시 버튼을 다시 햄버거로 변경
+
+
+});
+</script>
+
+<script>
+// 모든 nav-item에 클릭 이벤트 추가
+const navItems = document.querySelectorAll('.nav-item');
+
+navItems.forEach(item => {
+  item.addEventListener('click', function() {
+    // 화면 크기가 모바일일 경우에만 동작
+    if (window.innerWidth <= 768) {
+      // 먼저 모든 항목에서 active 클래스를 제거
+      navItems.forEach(nav => nav.classList.remove('active'));
+    
+      // 클릭한 항목에 active 클래스 추가
+      this.classList.add('active');
+    }
+  });
+});
+</script>
 
 
     <div class="content">
 
              <h3 style="text-align: left; margin-left: 40px;">RESEARCH FIELDS IN INTEREST</h3>
-            <p style="margin-left: 40px;"><b>Spectroscopic analysis & Mass spectrometry</b><br>
-            ·VUV-MATI mass spectrometry
-            <span style="display: inline; margin-left: 450px;">· Conformational chemistry</span>            
+            <p style="margin-left: 40px;" id="text1"><b>Spectroscopic analysis & Mass spectrometry</b><br>
+            · VUV-MATI mass spectrometry
           </p>
 
-            <img src="https://github.com/yebeen03/mass/blob/main/%EB%A7%88%ED%8B%B0.png?raw=true" alt="사진 1" style="width: 650px; height: auto; margin-left: 40px;">
-  <img src="https://github.com/yebeen03/mass/blob/main/%EB%B6%84%EA%B4%91.png?raw=true" alt="Conformational chemistry" style="width: 650px; height: auto; margin-left: 760px; text-align: center; display: block; margin-top: -340px;">
+            <img src="https://github.com/yebeen03/mass/blob/main/%EB%A7%88%ED%8B%B0.png?raw=true" alt="사진 1" style="width: 650px; height: auto; margin-left: 40px;" id="img1">
 
-             <p style="margin-left: 40px; margin-top: 80px;"><b>Optical nano material development & Analysis</b><br>
+            <p style="margin-left: 760px; margin-top: -430px;" id="text1">· Conformational chemistry
+    </p>
+
+
+  <img src="https://github.com/yebeen03/mass/blob/main/%EB%B6%84%EA%B4%91.png?raw=true" alt="Conformational chemistry" style="width: 650px; height: auto; margin-left: 760px; text-align: center; display: block; " id="img1">
+
+             <p style="margin-left: 40px; margin-top: 80px;" id="text1"><b>Optical nano material development & Analysis</b><br>
             · Sythesis of highly efficient SERS substrates 
-            <span style="display: inline; margin-left: 450px;">· Surface-enhanced Raman spectroscopy</span>            
           </p>
 
-            <img src="https://cc.kangwon.ac.kr/~chkwon/2015%20Lab%20Intro2_3.jpg" alt="사진 1" style="width: 650px; height: auto; margin-left: 40px;">
+            <img src="https://cc.kangwon.ac.kr/~chkwon/2015%20Lab%20Intro2_3.jpg" alt="사진 1" style="width: 650px; height: auto; margin-left: 40px;"id="img1">
 
-  <img src="https://cc.kangwon.ac.kr/~chkwon/SERS.jpg" alt="Conformational chemistry" style="width: 650px; height: auto; margin-left: 760px; text-align: center; display: block; margin-top: -410px;">
+            <p style="text-align: right; margin-right: 320px; margin-top: -490px;" id="text3">· Surface-enhanced Raman spectroscopy
+    </p>
 
-             <p style="margin-left: 40px; margin-top: 80px;"><b>Quantum chemical calculation</b><br>
+
+  <img src="https://cc.kangwon.ac.kr/~chkwon/SERS.jpg" alt="Conformational chemistry" style="width: 650px; height: auto; margin-left: 760px; text-align: center; display: block; " id="img2">
+
+             <p style="margin-left: 40px; margin-top: 80px;"id="text2"><b>Quantum chemical calculation</b><br>
             · Franck-Condon simulation 
-            <span style="display: inline; margin-left: 450px;">· SERS simulation</span>            
           </p>
-  
-         <img src="https://github.com/yebeen03/ms/blob/main/%EC%96%91%EC%9D%B4%EC%98%A8.png?raw=true" alt="사진 1" style="width: 650px; height: auto; margin-left: 40px;">
-  <img src="https://github.com/yebeen03/ms/blob/main/%EC%9E%A5%EB%B9%84.png?raw=true" alt="Conformational chemistry" style="width: 650px; height: auto; margin-left: 760px; text-align: center; display: block; margin-top: -490px;">
+
+
+         <img src="https://github.com/yebeen03/ms/blob/main/%EC%96%91%EC%9D%B4%EC%98%A8.png?raw=true" alt="사진 1" style="width: 650px; height: auto; margin-left: 40px;" id="img2">
+
+            <p style="text-align: right; margin-right: 520px; margin-top: -570px;" id="text2">  · SERS simulation
+    </p>
+
+  <img src="file:///C:/Users/User/Videos/%EC%BB%B4%ED%99%9C/%EC%9E%A5%EB%B9%84.png" alt="Conformational chemistry" style="width: 650px; height: auto; margin-left: 760px; text-align: center; display: block; " id="img2">
 
 
   
