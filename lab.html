@@ -16,6 +16,8 @@
             width: 100%;
         }
 
+
+
         /* 푸터 설정: 스크롤 후 맨 아래에서 보이게 함 */
         .footer {
             height: 80px;
@@ -236,6 +238,15 @@
             margin-top: -20px;
         }
 
+.menu-btn {
+    display: none; /* 기본적으로 숨겨두기 */
+    cursor: pointer;
+    font-size: 30px;
+    background: none;
+    border: none;
+    color: #181C14;
+}
+
 /* 모바일 (768px 이하)에서만 적용 */
 @media (max-width: 768px) {
 
@@ -249,6 +260,12 @@
     overflow-x: hidden; /* 모든 요소에 대해 좌우 스크롤 방지 */
     box-sizing: border-box; /* 모든 요소의 크기 계산에 padding, border 포함 */
 }
+
+
+        .footer {
+            height: 90px;
+            width: 100%;
+       }
 
     .nav {
         display: none;
@@ -391,7 +408,16 @@
             line-height: 3.0;
             margin-left: 20px !important;
             margin-top: 5px !important;
+    white-space: nowrap; /* 줄바꿈 방지 */
+
         }
+
+        .footer p {
+            margin: 0;
+            font-size: 13px;
+            line-height: 1.2;
+        }
+
 
         #img1 {
             width: 300px !important;
@@ -411,14 +437,14 @@
 
         #text2 {
             margin-left: 20px !important;
-            margin-top: 20px;
-        }
-        #text3 {
-            margin-left: 0px !important;
-            margin-top: 0px;
-            text-align: left;
+            margin-top: 20px;!important;
+           margin-bottom: 10px;!important;
+
         }
 
+    .pc-only {
+        display: none; /* 모바일에서 숨김 */
+    }
 
 
  }
@@ -552,13 +578,12 @@ navItems.forEach(item => {
             · Franck-Condon simulation 
           </p>
 
-
-         <img src="https://github.com/yebeen03/ms/blob/main/%EC%96%91%EC%9D%B4%EC%98%A8.png?raw=true" alt="사진 1" style="width: 650px; height: auto; margin-left: 40px;" id="img2">
-
-            <p style="text-align: right; margin-right: 520px; margin-top: -570px;" id="text2">  · SERS simulation
+            <p style="margin-left: 40px; margin-top: -30px;" id="text2">  · SERS simulation
     </p>
 
-  <img src="file:///C:/Users/User/Videos/%EC%BB%B4%ED%99%9C/%EC%9E%A5%EB%B9%84.png" alt="Conformational chemistry" style="width: 650px; height: auto; margin-left: 760px; text-align: center; display: block; " id="img2">
+         <img src="https://github.com/yebeen03/ms/blob/main/%EC%96%91%EC%9D%B4%EC%98%A8.png?raw=true" alt="사진 1"  style="width: 650px; height: auto; margin-left: 40px;" class="pc-only">
+
+  <img src="file:///C:/Users/User/Videos/%EC%BB%B4%ED%99%9C/%EC%9E%A5%EB%B9%84.png" alt="Conformational chemistry" style="width: 650px; height: auto; margin-left: 760px; margin-top: -490px; text-align: center; display: block;"class="pc-only">
 
 
   
