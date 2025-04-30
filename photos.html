@@ -435,6 +435,22 @@
             line-height: 3.0;
         }
 
+  .image-gallery {
+    display: flex;
+    flex-wrap: wrap; /* 이미지를 두 줄로 나누기 위해 wrap 사용 */
+    gap: 10px; /* 이미지 사이에 간격 추가 */
+  }
+
+  .image-gallery img {
+    width:180px; /* 두 이미지를 한 줄에 배치 */
+    height: auto;
+  }
+
+  .image-gallery p {
+    text-align: center;
+    width: 100%;
+  }
+
   .gallery-container img {
     max-width: 100% !important;
     height: auto !important;
