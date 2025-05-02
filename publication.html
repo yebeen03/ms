@@ -187,6 +187,46 @@
     gap: 15px;
 }
 
+.section-header {
+  display: flex;
+  justify-content: center;
+  margin: 70px 0 0px;
+  width: 100vw;             /* 🔸 전체 가로폭으로! */
+  height: 250px;           /* 🔸 높이도 늘리기 (원하는 만큼) */
+  padding: 0;
+  font-size: 30px;
+  font-weight: bold;
+
+}
+
+.header-box {
+  position: relative;
+  background-color: none;      /* 네모 배경색 */
+  color: black;                   /* 글자색 */
+  padding: 15px 30px;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  width: 100%; /* 가로 전체 채우기 */
+  max-width: none;     /* 🔸 이걸로 제한 해제 */
+  background-size: cover;
+  display: flex;
+  align-items: center;       /* 세로 가운데 */
+  justify-content: center;   /* 가로 가운데 */
+      border-bottom: 2px solid #D8D8D8;
+      border-top: 2px solid #D8D8D8;
+
+}
+
+.header-text {
+  position: relative;
+  z-index: 2; /* 오버레이 위에 배치 */
+  color: #181C14;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+}
+
 @media (max-width: 768px) {
 
                 .logo img {
@@ -366,6 +406,45 @@
             line-height: 3.0;
         }
 
+.section-header {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0 0px;
+  width: 100vw;             /* 🔸 전체 가로폭으로! */
+  height: 180px;           /* 🔸 높이도 늘리기 (원하는 만큼) */
+  padding: 0;
+  font-size: 20px;
+  font-weight: bold;
+
+}
+
+.header-box {
+  position: relative;
+  background-color: none;      /* 네모 배경색 */
+  color: black;                   /* 글자색 */
+  padding: 15px 30px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  width: 100%; /* 가로 전체 채우기 */
+  max-width: none;     /* 🔸 이걸로 제한 해제 */
+  background-size: cover;
+  display: flex;
+  align-items: center;       /* 세로 가운데 */
+  justify-content: center;   /* 가로 가운데 */
+  outline: 2px solid #D8D8D8;
+
+}
+
+.header-text {
+  position: relative;
+  z-index: 2; /* 오버레이 위에 배치 */
+  color: #181C14;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
 }
 
 
@@ -466,12 +545,14 @@ navItems.forEach(item => {
 });
 </script>
 
+<div class="section-header">
+<div class="header-box">
+  <div class="overlay"></div>
+  <div class="header-text">PUBLICATIONS</div>
+</div>
+</div>
 
     <div class="content">
-
-  
-            
-             <h3 class="text-align: left;">PUBLICATIONS</h3>
             <p><b>78. Plasmon-induced azo coupling of 4-amino-4'-nitrobiphenyl on Ag nanoparticles: via -NH<sub>2</sub> and/or -NO<sub>2</sub>?</b><br>
   Sangeun Kim, S. Y. Eom, and C. H. Kwon<sup>*</sup>, in preparation to submit. </span> </p>  <br>
            <p><b>77. Study on plasmon-induced azo coupling reaction of 4-aminocyanobiphenyl on Ag and Au nanoparticles</b><br>

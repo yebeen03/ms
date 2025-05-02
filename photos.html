@@ -79,8 +79,6 @@
             width: 100%;
             z-index: 1000;
             border-bottom: 2px solid #D8D8D8;
-
-
         }
 
         .nav a {
@@ -250,6 +248,46 @@
 .nav-menu {
     display: flex; /* PC에서는 기본 네비게이션 표시 */
     gap: 15px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: center;
+  margin: 70px 0 70px;
+  width: 100vw;             /* 🔸 전체 가로폭으로! */
+  height: 250px;           /* 🔸 높이도 늘리기 (원하는 만큼) */
+  padding: 0;
+  font-size: 30px;
+  font-weight: bold;
+
+}
+
+.header-box {
+  position: relative;
+  background-color: none;      /* 네모 배경색 */
+  color: black;                   /* 글자색 */
+  padding: 15px 30px;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  width: 100%; /* 가로 전체 채우기 */
+  max-width: none;     /* 🔸 이걸로 제한 해제 */
+  background-size: cover;
+  display: flex;
+  align-items: center;       /* 세로 가운데 */
+  justify-content: center;   /* 가로 가운데 */
+      border-bottom: 2px solid #D8D8D8;
+      border-top: 2px solid #D8D8D8;
+
+}
+
+.header-text {
+  position: relative;
+  z-index: 2; /* 오버레이 위에 배치 */
+  color: #181C14;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
 }
 
 @media (max-width: 768px) {
@@ -431,37 +469,71 @@
         }
 
         p {
-            font-size: 13px;
+            font-size: 20px;
             line-height: 3.0;
         }
 
-  .image-gallery {
-    display: flex;
-    flex-wrap: wrap; /* 이미지를 두 줄로 나누기 위해 wrap 사용 */
-    gap: 10px; /* 이미지 사이에 간격 추가 */
-  }
+.image-gallery {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  width: 400px;     /* 원하는 넓이로 지정 */
+  height: auto;     /* 원본 비율 유지 */
+}
+.image-gallery p {
+  word-break: break-word;
+  white-space: normal;   /* nowrap이면 줄 안 바뀜 */
+  text-align: center;
+  font-size: 20px;       /* 원하는 크기로 */
+  max-width: 200px;      /* 이미지보다 안 크도록 제한 */
+  margin: 0 auto;
+}
 
-  .image-gallery img {
-    width:180px; /* 두 이미지를 한 줄에 배치 */
-    height: auto;
-  }
+.section-header {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0 30px;
+  width: 100vw;             /* 🔸 전체 가로폭으로! */
+  height: 180px;           /* 🔸 높이도 늘리기 (원하는 만큼) */
+  padding: 0;
+  font-size: 20px;
+  font-weight: bold;
 
-  .image-gallery p {
-    text-align: center;
-    width: 100%;
-  }
+}
 
-  .gallery-container img {
-    max-width: 100% !important;
+.header-box {
+  position: relative;
+  background-color: none;      /* 네모 배경색 */
+  color: black;                   /* 글자색 */
+  padding: 15px 30px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  width: 100%; /* 가로 전체 채우기 */
+  max-width: none;     /* 🔸 이걸로 제한 해제 */
+  background-size: cover;
+  display: flex;
+  align-items: center;       /* 세로 가운데 */
+  justify-content: center;   /* 가로 가운데 */
+  outline: 2px solid #D8D8D8;
+
+}
+
+.header-text {
+  position: relative;
+  z-index: 2; /* 오버레이 위에 배치 */
+  color: #181C14;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+  .lab-photo-container img {
+    width: 90% !important;
+    margin: 20px auto !important;
+    display: block !important;
     height: auto !important;
   }
-
-  img[style*="margin-left: 800px"] {
-    display: block;
-    margin: 20px auto !important; /* 가운데 정렬하려면 이걸로 */
-  }
-
-
 }
 
 
@@ -489,11 +561,36 @@
 
 
     <!-- 🔹 본문 콘텐츠 -->
-    <div class="content">
-        <h3 style="font-size: 25px; text-align: left; margin-left: 130px; margin-top:40px;           text-decoration: underline; /* 밑줄 추가 */ text-underline-position: under;">Group Photos</h3>
+<div class="section-header">
+<div class="header-box">
+  <div class="overlay"></div>
+  <div class="header-text">Group Photos</div>
+</div>
+</div>
 
         <!-- 🔹 이미지 갤러리 -->
    <div class="gallery-container">
+
+
+        <div class="image-gallery">
+            <img src="대한화학회.png" alt="사진 1" onclick="openModal('대한화학회.png', '202504, 202504 KCS participation, 수원')">
+  <p>202504</p>
+         </div>
+
+        <div class="image-gallery">
+            <img src="조교님.png" alt="사진 1" onclick="openModal('조교님.png', '202504, 대한화학회 포스터상 수상')">
+  <p>202504</p>
+         </div>
+
+        <div class="image-gallery">
+            <img src="교수님.png" alt="사진 1" onclick="openModal('교수님.png', '202504, 권찬호 교수님 생신')">
+  <p>202504</p>
+         </div>
+
+        <div class="image-gallery">
+            <img src="박사님.png" alt="사진 1" onclick="openModal('박사님.png', '202504, 박성만 박사님 생신')">
+  <p>202504</p>
+         </div>
 
         <div class="image-gallery">
             <img src="https://cc.kangwon.ac.kr/~chkwon/202405_4th-year%20stdudents.jpg" alt="사진 1" onclick="openModal('https://cc.kangwon.ac.kr/~chkwon/202405_4th-year%20stdudents.jpg', '202405 4th-year stdudents, 후문')">
@@ -544,7 +641,6 @@
         <div class="image-gallery">
             <img src="https://cc.kangwon.ac.kr/~chkwon/2018KCSinJejuICC2.jpg" alt="사진 2" onclick="openModal('https://cc.kangwon.ac.kr/~chkwon/2018KCSinJejuICC2.jpg', '2018 KCS Meeting at ICC, 제주')">
   <p>2018</p>
-
          </div>
 
         <div class="image-gallery">
@@ -604,9 +700,15 @@
         </div>
 </div>
 
-    <div class="content">
-        <h3 style="font-size: 25px; text-align: left; margin-left: 130px; text-decoration: underline; margin-top: 50px; /* 밑줄 추가 */ text-underline-position: under;">Lab Photos</h3>
+    <!-- 🔹 본문 콘텐츠 -->
+<div class="section-header">
+<div class="header-box">
+  <div class="overlay"></div>
+  <div class="header-text">Lab Photos</div>
+</div>
+</div>
  
+<div class="lab-photo-container">
             <img src="https://cc.kangwon.ac.kr/~chkwon/Lab1.jpg" alt="사진 1" style="width: 600px; height: auto; text-align: left; margin-left: 60px; display: block; margin-top: 50px;">
            <img src="https://cc.kangwon.ac.kr/~chkwon/Instrum2.jpg" alt="사진 1" style="width: 600px; height: auto; text-align: center; margin-left: 800px; display: block; margin-top: -450px;">
 

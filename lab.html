@@ -257,6 +257,46 @@
     gap: 15px;
 }
 
+.section-header {
+  display: flex;
+  justify-content: center;
+  margin: 70px 0 0px;
+  width: 100vw;             /* 🔸 전체 가로폭으로! */
+  height: 250px;           /* 🔸 높이도 늘리기 (원하는 만큼) */
+  padding: 0;
+  font-size: 30px;
+  font-weight: bold;
+
+}
+
+.header-box {
+  position: relative;
+  background-color: none;      /* 네모 배경색 */
+  color: black;                   /* 글자색 */
+  padding: 15px 30px;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  width: 100%; /* 가로 전체 채우기 */
+  max-width: none;     /* 🔸 이걸로 제한 해제 */
+  background-size: cover;
+  display: flex;
+  align-items: center;       /* 세로 가운데 */
+  justify-content: center;   /* 가로 가운데 */
+      border-bottom: 2px solid #D8D8D8;
+      border-top: 2px solid #D8D8D8;
+
+}
+
+.header-text {
+  position: relative;
+  z-index: 2; /* 오버레이 위에 배치 */
+  color: #181C14;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+}
+
 
 /* 모바일 (768px 이하)에서만 적용 */
 @media (max-width: 768px) {
@@ -446,13 +486,50 @@
 
         }
 
+
     .pc-only {
-        display: none; /* 모바일에서 숨김 */
+      display: none;
     }
 
+.section-header {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0 0px;
+  width: 100vw;             /* 🔸 전체 가로폭으로! */
+  height: 180px;           /* 🔸 높이도 늘리기 (원하는 만큼) */
+  padding: 0;
+  font-size: 20px;
+  font-weight: bold;
 
- }
+}
 
+.header-box {
+  position: relative;
+  background-color: none;      /* 네모 배경색 */
+  color: black;                   /* 글자색 */
+  padding: 15px 30px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  width: 100%; /* 가로 전체 채우기 */
+  max-width: none;     /* 🔸 이걸로 제한 해제 */
+  background-size: cover;
+  display: flex;
+  align-items: center;       /* 세로 가운데 */
+  justify-content: center;   /* 가로 가운데 */
+  outline: 2px solid #D8D8D8;
+
+}
+
+.header-text {
+  position: relative;
+  z-index: 2; /* 오버레이 위에 배치 */
+  color: #181C14;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+}
     </style>
 </head>
 <body>
@@ -551,9 +628,16 @@ navItems.forEach(item => {
 </script>
 
 
+    <!-- 🔹 본문 콘텐츠 -->
+<div class="section-header">
+<div class="header-box">
+  <div class="overlay"></div>
+  <div class="header-text">RESEARCH FIELDS IN INTEREST</div>
+</div>
+</div>
+
     <div class="content">
 
-             <h3 style="text-align: left; margin-left: 40px;">RESEARCH FIELDS IN INTEREST</h3>
             <p style="margin-left: 40px;" id="text1"><b>Spectroscopic analysis & Mass spectrometry</b><br>
             · VUV-MATI mass spectrometry
           </p>
@@ -584,6 +668,7 @@ navItems.forEach(item => {
 
             <p style="margin-left: 40px; margin-top: -30px;" id="text2">  · SERS simulation
     </p>
+
 
          <img src="https://github.com/yebeen03/ms/blob/main/%EC%96%91%EC%9D%B4%EC%98%A8.png?raw=true" alt="사진 1"  style="width: 650px; height: auto; margin-left: 40px;" class="pc-only">
 
