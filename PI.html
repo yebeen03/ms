@@ -11,7 +11,7 @@
             color: white;
             text-align: left;
             padding: 0;
-            background-color: #FAFAF8; !important;
+            background-color: white;
             display: block;
             width: 100%;
     position: relative;  /* 🔹 추가 */
@@ -117,7 +117,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #FAFAF8;
+            background: white;
             padding: 10px 20px;
             position: fixed;
             top: 0;
@@ -147,19 +147,7 @@
         }
 
         .nav-item.active {
-            background-color: #435585;
-            color: white;
-        }
-
-        .nav-item.active::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #435585;
-            z-index: -1;
+            color: darkblue;
         }
 
         .logo img {
@@ -221,13 +209,13 @@
 .section-header {
   display: flex;
   justify-content: center;
-  margin: 70px 0 10px;
+  margin: 70px 0 0px;
   width: 100vw;             /* 🔸 전체 가로폭으로! */
-  height: 250px;           /* 🔸 높이도 늘리기 (원하는 만큼) */
+  height: 350px;           /* 🔸 높이도 늘리기 (원하는 만큼) */
   padding: 0;
   font-size: 30px;
   font-weight: bold;
-
+  overflow: hidden;
 }
 
 .header-box {
@@ -249,6 +237,41 @@
 
 }
 
+.image-part {
+  flex: 3;
+  background-color: #000;
+  hight: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.image-part img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;}
+
+.text-part {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-image: url("space.jpg");
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;}
+
+.text-part::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(255, 255, 255, 0.7);  /* 흰색 반투명 덮개 */
+  z-index: 1;
+}
+
 .header-text {
   position: relative;
   z-index: 2; /* 오버레이 위에 배치 */
@@ -258,6 +281,48 @@
   text-align: center;
 }
 
+.section-tabs {
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid #D8D8D8;
+  overflow: hidden;
+  width: 100%;
+  height: 80px;
+  margin: 60px auto;
+  background-color: white;
+ text-align: center;
+justify-content: center;  
+  align-items: center;         /* 세로 중앙 정렬 */
+  justify-content: center;     /* 가로 중앙 정렬 */
+  margin-top: -20px;
+}
+
+.section-tabs a {
+  flex: 1;
+  text-align: center;
+  padding: 15px 0;
+  text-decoration: none;
+  color: #181C14;
+  font-weight: bold;
+  font-size: 15px;
+  border-right: 2px solid #D8D8D8;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  align-items: center;         /* 세로 중앙 정렬 */
+  justify-content: center;     /* 가로 중앙 정렬 */
+}
+
+.section-tabs a:last-child {
+  border-right: none; /* 마지막 항목엔 오른쪽 테두리 제거 */
+}
+
+.section-tabs a:hover {
+  background-color: #F0F0F0;
+  color: darkblue;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 
 /* 모바일 (768px 이하)에서만 적용 */
 @media (max-width: 768px) {
@@ -626,43 +691,69 @@ navItems.forEach(item => {
 </script>
 
 
+   <!-- 🔹 본문 콘텐츠 -->
 <div class="section-header">
-<div class="header-box">
-  <div class="overlay"></div>
-  <div class="header-text">PRINCIPAL INVESTIGATOR</div>
-</div>
+<div class="header-box image-part">
+    <img src="space2.jpg" alt="헤더 이미지">
+  </div>
+  <div class="header-box text-part">
+    <div class="header-text">Principal Investigator</div>
+  </div>
 </div>
 
     <div class="content">
 
+<div class="section-tabs">
+  <a href="#section-a">PROFESSOR</a>
+  <a href="#section-b">EDUCATION</a>
+  <a href="#section-c">PROFESSIONAL CAREER</a>
+  <a href="#section-d">TEACHNING ASSISTANT EXPERIENCE</a>
+  <a href="#section-d">HONORS
+</a>
+</div>
+
+<div id="section-a">
+
+            <p style="display: flex; font-size: 25px; color: #181C14; text-align: center;  padding: 30px;  justify-content: center;  align-items: center; margin-left: 0px; "><b>PROFESSOR</b></p>
 
      <img src="https://cc.kangwon.ac.kr/~chkwon/Chan%20Ho%20Kwon.jpg" 
        alt="Profile Image" id="img1" style="width: 350px; height: 450px; margin-top: 30px; margin-left: 100px;">
 
        <div class="publications">
-           <h3 style="text-align: left; margin-top: -450px; margin-left: 610px;  font-size: 30px; color: #435585; display: block;" id="text1">Prof. Chan Ho Kwon</h3>
-
-<p style="color: gray; margin-left: 60px; font-size: 12px; text-align: center; margin-top: 40px; display: block;" id="text3"><a href="http://chemistry.kangwon.ac.kr/chemistry/index.do" style="color: gray; text-decoration: none;">Department of Chemistry Kangwon National University, Chuncheon 24341, Korea</a></p>
+           <h3 style="text-align: left; margin-top: -400px; margin-left: 510px;  font-size: 25px; color: #435585; display: block;" id="text1">Prof. Chan Ho Kwon</h3>
 
 
- <p style="margin-left: 180px; line-height:1.5; margin-top: 400px; display: block;" id="text2">Office: +82-33-250-8496</p>
+           <h4 style="text-align: left; margin-top: -0px; margin-left: 510px; font-size: 15px;">연구 관심 분야</h4>
 
-<p style="margin-left: 140px; line-height:1.5;" id="text4"><a href="mailto: ckkwon@kangwon.ac.kr">E-mail: chkwon@kangwon.ac.kr</a></p>
-	
+<p style="margin-left: 510px; font-size: 15px;"><b>1. 진공자외선- 질량분석 문턱 이온화 (VUV-MATI)분광법을 이용한 다양한 이온계 연구</b></p>
 
-           <h4 style="text-align: left; margin-top: -530px; margin-left: 560px;">EDUCATION</h4>
+<p style="margin-left: 510px; font-size: 15px;"><b>2. 이온의 반응 동력학 연구를 위한 새로운 이온 이미징 분광기 개발</b>
 
-<p style="margin-left: 560px;"><b>B.S., Department of Chemistry (summa cum laude), Kangwon National University, Korea, 1997</b></p>
+<p style="margin-left: 510px; font-size: 15px;"><b>3. 표면의 흡착된 분자들의 표면증강 라만 산란(SERS)연구</b></p>
 
-<p style="margin-left: 560px;"><b>M.S., Department of Chemistry, Seoul National University, Korea, 1999</b>
- <p style="color: #181C14; line-height: 1.8; margin-left: 560px; margin-top: -13px;">Advisor : Prof. Myung Soo Kim<br>· Thesis title : "Electromagnetic enhancement effect for surface-enhanced Raman scattering (SERS) <br> in morphology change by annealing of silver island film"</p>
+<p style="margin-left: 510px; font-size: 15px;"><b>4. 생분자계의 질량분석 및 질량 분석계의 고안 및 개발</b>
 
-<p style="margin-left: 560px;"> <b> Ph.D.,School of Chemistry, Seoul National University, Korea,2004</b></p>
- 
-<p style="color: #181C14; line-height: 1.8; margin-left: 560px; margin-top: -13px;">Advisor : Prof. Myung Soo Kim<br>· Thesis title : "Spectroscopy and mass spectrometry of state-selected benzenoid molecular ions"</p>
+<p style="margin-left: 510px; font-size: 15px;">☎ Office: +82-33-250-8496</p>
 
+<p style="margin-left: 510px; font-size: 15px;"><a href="mailto: ckkwon@kangwon.ac.kr"> ✉ E-mail: chkwon@kangwon.ac.kr</a></p>
 
-          <h4 style="text-align: left; margin-top: 270px; margin-left: 110px;">PROFESSIONAL CAREER</h4>
+<div id="section-b">
+
+            <p style="display: flex; font-size: 25px; color: #181C14; text-align: center;  padding: 40px; justify-content: center;  align-items: center; margin-top: 100px; margin-left: 0px; "><b>EDUCATION</b></p>
+
+ <p style="margin-left: 110px; margin-top: 40px;"><b>B.S., Department of Chemistry (summa cum laude), Kangwon National University, Korea, 1997</b></p>
+
+<p style="margin-left: 110px;"><b>M.S., Department of Chemistry, Seoul National University, Korea, 1999</b></p>
+
+<p style="margin-left: 110px;">Advisor : Prof. Myung Soo Kim<br>· Thesis title : "Electromagnetic enhancement effect for surface-enhanced Raman scattering (SERS) <br> in morphology change by annealing of silver island film"</p>
+
+<p style="margin-left: 110px;"><b>Ph.D.,School of Chemistry, Seoul National University, Korea,2004</b></p>
+
+<p style="margin-left: 110px;">Advisor : Prof. Myung Soo Kim<br>· Thesis title : "Spectroscopy and mass spectrometry of state-selected benzenoid molecular ions"</p>
+
+<div id="section-c">
+
+            <p style="display: flex; font-size: 25px;  color: #181C14; text-align: center;  padding: 40px;  justify-content: center;  align-items: center; margin-top: 150px;  margin-left: 0px;"><b>PROFESSIONAL CAREER</b></p>
 
  <p style="margin-left: 110px; margin-top: 40px;"><b>Jun2016-May2018   Chairman at Department of Chemistry, Kangwon National University, Chuncheon, Korea.</b></p>
 
@@ -722,20 +813,25 @@ navItems.forEach(item => {
 <p style="color: #181C14; line-height: 1.8; margin-left: 110px;">· Theoretical study of the geometry of van der Waals complex using GAMESS package</p>
 
 <p style="margin-left: 110px;"><b>Oct1991-Feb1994      Army service, Korea.</b></p>
-          <h4 style="text-align: left; margin-top: 70px; margin-left: 110px;">TEACHING ASSISTANT EXPERIENCE</h4>
 
-<p style="color: #181C14; line-height: 1.8; margin-left: 110px;"><b>· General Chemistry Lab, Physical Chemistry Lab, and Physical Chemistry Lecture, Seoul National University.</b>
+<div id="section-d">
+
+            <p style="display: flex; font-size: 25px; color: #181C14; text-align: center; padding: 40px;  justify-content: center;  align-items: center; margin-left: 0px; margin-top: 100px;"><b>TEACHNING ASSISTANT EXPERIENCE</b></p>
+
+<p style="color: #181C14; line-height: 1.8; margin-left: 110px;">General Chemistry Lab, Physical Chemistry Lab, and Physical Chemistry Lecture, Seoul National University
 </p>
 
-           <h4 style="text-align: left; margin-top: 70px; margin-left: 110px;">HONORS</h4>
+<div id="section-e">
 
-<p style="margin-left: 110px;"><b>2020 Award for Myung Soo Kim Academic Excellence Prize, KCS.</b></p>
+            <p style="display: flex; font-size: 25px; color: #181C14; text-align: center;  padding: 40px;  justify-content: center;  align-items: center;  margin-left: 0px; margin-top: 100px; "><b>HONORS</b></p>
 
-<p style="margin-left: 110px;"><b>2000, 2002, 2003  Award for Excellent Research Paper, Seoul National University.</b></p>
+<p style="margin-left: 110px;">2020 Award for Myung Soo Kim Academic Excellence Prize, KCS</p>
 
-<p style="margin-left: 110px;"><b>1997 Summa cum laude, Kangwon National University.</b></p>
+<p style="margin-left: 110px;">2000, 2002, 2003  Award for Excellent Research Paper, Seoul National University</p>
 
-<p style="margin-left: 110px;"><b>1990, 1991, 1994, 1995, and 1996   Academic Excellence Scholarship Awards, Kangwon National University.</b></p>
+<p style="margin-left: 110px;">1997 Summa cum laude, Kangwon National University</p>
+
+<p style="margin-left: 110px;">1990, 1991, 1994, 1995, and 1996   Academic Excellence Scholarship Awards, Kangwon National University</p>
 
                </div>
     </div>

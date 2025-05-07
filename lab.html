@@ -11,7 +11,7 @@
             color: white;
             text-align: left;
             padding: 0;
-            background-color: #FAFAF8; !important;
+            background-color: white;
             display: block;
             width: 100%;
     position: relative;  /* 🔹 추가 */
@@ -107,7 +107,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #FAFAF8;
+            background: white;
             padding: 10px 20px;
             position: fixed;
             top: 0;
@@ -137,20 +137,9 @@
         }
 
         .nav-item.active {
-            background-color: #435585;
-            color: white;
+            color: darkblue;
         }
 
-        .nav-item.active::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #435585;
-            z-index: -1;
-        }
 
         .logo img {
             height: 50px;
@@ -170,7 +159,7 @@
             padding: 80px 20px 20px;
             min-height: 100vh;
             text-align: left;
-            margin-left: 20px;
+            margin-left: 100px;
   position: relative;
   z-index: 1;
          }
@@ -262,11 +251,11 @@
   justify-content: center;
   margin: 70px 0 0px;
   width: 100vw;             /* 🔸 전체 가로폭으로! */
-  height: 250px;           /* 🔸 높이도 늘리기 (원하는 만큼) */
+  height: 350px;           /* 🔸 높이도 늘리기 (원하는 만큼) */
   padding: 0;
   font-size: 30px;
   font-weight: bold;
-
+  overflow: hidden;
 }
 
 .header-box {
@@ -288,6 +277,41 @@
 
 }
 
+.image-part {
+  flex: 3;
+  background-color: #000;
+  hight: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.image-part img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;}
+
+.text-part {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-image: url("space.jpg");
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;}
+
+.text-part::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(255, 255, 255, 0.7);  /* 흰색 반투명 덮개 */
+  z-index: 1;
+}
+
 .header-text {
   position: relative;
   z-index: 2; /* 오버레이 위에 배치 */
@@ -297,6 +321,48 @@
   text-align: center;
 }
 
+.section-tabs {
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid #D8D8D8;
+  overflow: hidden;
+  width: 97%;
+  height: 80px;
+  margin: 60px auto;
+  background-color: white;
+ text-align: center;
+justify-content: center;  
+  align-items: center;         /* 세로 중앙 정렬 */
+  justify-content: center;     /* 가로 중앙 정렬 */
+
+}
+
+.section-tabs a {
+  flex: 1;
+  text-align: center;
+  padding: 15px 0;
+  text-decoration: none;
+  color: #181C14;
+  font-weight: bold;
+  font-size: 15px;
+  border-right: 2px solid #D8D8D8;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  align-items: center;         /* 세로 중앙 정렬 */
+  justify-content: center;     /* 가로 중앙 정렬 */
+}
+
+.section-tabs a:last-child {
+  border-right: none; /* 마지막 항목엔 오른쪽 테두리 제거 */
+}
+
+.section-tabs a:hover {
+  background-color: #F0F0F0;
+  color: darkblue;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 
 /* 모바일 (768px 이하)에서만 적용 */
 @media (max-width: 768px) {
@@ -463,33 +529,6 @@
         }
 
 
-        #img1 {
-            width: 300px !important;
-            height: auto; !important;
-            margin-left: 5px !important;
-        }
-
-        #text1 {
-            margin-left: 20px !important;
-        }
-
-        #img2 {
-            width: 300px !important;
-            height: auto; !important;
-            margin-left: 5px !important;
-        }
-
-        #text2 {
-            margin-left: 20px !important;
-            margin-top: 20px;!important;
-           margin-bottom: 10px;!important;
-
-        }
-
-
-    .pc-only {
-      display: none;
-    }
 
 .section-header {
   display: flex;
@@ -630,54 +669,117 @@ navItems.forEach(item => {
 
     <!-- 🔹 본문 콘텐츠 -->
 <div class="section-header">
-<div class="header-box">
-  <div class="overlay"></div>
-  <div class="header-text">RESEARCH FIELDS IN INTEREST</div>
+<div class="header-box image-part">
+    <img src="space2.jpg" alt="헤더 이미지">
+  </div>
+  <div class="header-box text-part">
+    <div class="header-text">RESEARCH FIELDS IN INTEREST</div>
+  </div>
 </div>
+
+<div class="section-tabs">
+  <a href="#section-a">INTRO</a>
+  <a href="#section-b">Spectroscopic analysis <br>& Mass spectrometry</a>
+  <a href="#section-c">Optical nano material development <br>& Analysis</a>
+  <a href="#section-d">Quantum chemical calculation</a>
 </div>
 
-    <div class="content">
+<div id="section-a">
 
-            <p style="margin-left: 40px;" id="text1"><b>Spectroscopic analysis & Mass spectrometry</b><br>
-            · VUV-MATI mass spectrometry
-          </p>
+            <p style="font-size: 25px; color: #181C14; text-align: center; padding: 30px;  margin: 20px; "><b>INTRO</b></p>
 
-            <img src="https://github.com/yebeen03/mass/blob/main/%EB%A7%88%ED%8B%B0.png?raw=true" alt="사진 1" style="width: 650px; height: auto; margin-left: 40px;" id="img1">
+<div style="text-align: center;">
 
-            <p style="margin-left: 760px; margin-top: -430px;" id="text1">· Conformational chemistry
-    </p>
+            <img src="space.jpg" alt="사진 1" style="width: 800px; height: 400px;  id="img1" ;>
 
-
-  <img src="https://github.com/yebeen03/mass/blob/main/%EB%B6%84%EA%B4%91.png?raw=true" alt="Conformational chemistry" style="width: 650px; height: auto; margin-left: 760px; text-align: center; display: block; " id="img1">
-
-             <p style="margin-left: 40px; margin-top: 80px;" id="text1"><b>Optical nano material development & Analysis</b><br>
-            · Sythesis of highly efficient SERS substrates 
-          </p>
-
-            <img src="https://cc.kangwon.ac.kr/~chkwon/2015%20Lab%20Intro2_3.jpg" alt="사진 1" style="width: 650px; height: auto; margin-left: 40px;"id="img1">
-
-            <p style="text-align: right; margin-right: 320px; margin-top: -490px;" id="text3">· Surface-enhanced Raman spectroscopy
-    </p>
+</div>
+            <p style="font-size: 18px; color: #181C14; margin-left: 50px;">⦁ 성간 물질(Interstellar medium)은 은하의 형성에 따른 원시적인 잔여물, 별들의 잔해, 미래의 별과 행성을 위한 성분이 포함되어 있어, 성간 물질을 연구하는 것은 은하의 구조와 별의 수명주기를 이해하는 데 필수적이며, 지구에 존재하는 생명체의 근원에 대한 정보를 주기 때문에 성간 물질에 존재하는 화학종에 대한 연구(중성분자, 라디칼, 분자 양이온 등)는 매우 중요</p>
 
 
-  <img src="https://cc.kangwon.ac.kr/~chkwon/SERS.jpg" alt="Conformational chemistry" style="width: 650px; height: auto; margin-left: 760px; text-align: center; display: block; " id="img2">
+<div style="text-align: center;">
 
-             <p style="margin-left: 40px; margin-top: 80px;"id="text2"><b>Quantum chemical calculation</b><br>
-            · Franck-Condon simulation 
-          </p>
+            <img src="아미노산.png" alt="사진 1" style="width: 800px; height: 400px;  margin-top: 50px; id="img1" ;>
 
-            <p style="margin-left: 40px; margin-top: -30px;" id="text2">  · SERS simulation
-    </p>
+</div>
+            <p style="font-size: 18px; color: #181C14; margin-left: 50px; ">⦁ 아미노산이나 핵 염기와 같은 생물학적 분자들은 상온에서 대부분 고체로 존재하기 때문에 이러한 분자의 질량 스펙트럼 측정을 위해서는 열적 가열을 통해 기화가 필요하지만 대부분 열을 가하면 분자 번형이 일어나거나 분자 깨짐이 발생하기 때문에 본자 본연의 성질을 연구하는데 큰 어려움 존재<br>⦁ 이러한 단점을 극복하면서 질량 스펙트럼을 측정할 수 있는 방법들이 다양하게 연구, 개발되고 있으며 최근 우리 연구실(mass spectro scopy laboratory)에서는적외선과 진공 자외선을 이용한 탈착/이온화 법을 개발</p>
+
+<div style="text-align: center;">
+
+            <img src="질량분석.png" alt="사진 1" style="width: 800px; height: 400px; margin-top: 50px;  id="img1" ;>
+
+</div>
+            <p style="font-size: 18px; color: #181C14; margin-left: 50px; ">⦁ 분자의 질량 분석을 위해서는 분자를 이온화 하여야 하며, 이때 대부분의 유기 분자들을 이온으로 만들기 위해서는 진공 자외선에 해당하는 광자 에너지 필요, 이 영역의 에너지를 만들기 위해서는 분자가 자외선을 연속적으로 두 번 흡수 하거나 진공 자외선 에너지를 갖는 광자를 한 번 흡수<br>⦁ 우리 실험실에서는 7.9 ~ 10.1eV의 에너지를 가지는 진공 자외선을 만들고 있으며, 이렇게 만든 진공 자외선은 성간 물질에 존재하는 화학종이나 생물학적 분자의 구조를 연구하는 데 이용</p>
+
+<div id="section-b">
+
+            <p style="font-size: 25px; color: #181C14; text-align: center; padding: 30px; "><b>Spectroscopic analysis & Mass spectrometry</b></p>
+
+            <p style="font-size: 22px; margin-top: 30px; color: #181C14; text-align: center; text-decoration: underline; text-underline-position: under;"><b>VUV-MATI</b></p>
+
+<div style="text-align: center;">
+
+            <img src="마티.png" alt="사진 1" style="width: 800px; height: 400px;  id="img1" ;>
+
+</div>
+            <p style="font-size: 18px; color: #181C14; margin-left: 50px;">⦁ 진공자외선 레이저를 쪼여 분자를 리드버그 상태 (이온화한계 바로 밑에 있는 상태)로 올림<br>⦁ 전기장 펄스를 걸어 리드버그 전자를 떼냄→ 이온화<br>⦁ 진공자외선 레이저 파장을 바꾸어 이온 전류 검출→ MATI 스펙트럼<br>⦁ MATI 스펙트럼 = 이온의 진동 스펙트럼 = 이온 구조에 대한 정보를 반영 </p>
 
 
-         <img src="https://github.com/yebeen03/ms/blob/main/%EC%96%91%EC%9D%B4%EC%98%A8.png?raw=true" alt="사진 1"  style="width: 650px; height: auto; margin-left: 40px;" class="pc-only">
+            <p style="font-size: 22px; margin-top: 50px; color: #181C14; text-align: center; text-decoration: underline; text-underline-position: under; "><b>IR resonant VUV-MATI</b></p>
 
-  <img src="file:///C:/Users/User/Videos/%EC%BB%B4%ED%99%9C/%EC%9E%A5%EB%B9%84.png" alt="Conformational chemistry" style="width: 650px; height: auto; margin-left: 760px; margin-top: -490px; text-align: center; display: block;"class="pc-only">
+<div style="text-align: center;">
+
+            <img src="레조넌트.png" alt="사진 1" style="width: 800px; height: 400px;  id="img1" ;>
+
+</div>
+            <p style="font-size: 18px; color: #181C14; margin-left: 50px; ">⦁ 분자 내 존재하는 개별 이형태체의 중성 상태 진동 스펙트럼을 선택적으로 측정할 수 있는 방법인 IR dip VUV-MATI 분광법(하단)과 개별 이형태체의 이온 진동 스펙트럼을 선택적으로 측정할 수 있는 IR hole-burn VUV-MATI 분광법(상단)</p>
+
+            <p style="font-size: 22px; margin-top: 50px; color: #181C14; text-align: center; text-decoration: underline; text-underline-position: under; "><b>IR desorption VUV photoionization</b></p>
+
+<div style="text-align: center;">
+
+            <img src="광이온화.png" alt="사진 1" style="width: 800px; height: 400px;  id="img1" ;>
+
+</div>
+            <p style="font-size: 18px; color: #181C14; margin-left: 50px; ">⦁ 매트릭스 보조 레이저를 탈착 이온화법(MARDI)의 매트릭스 대신 흑연을 시료, 그리고 용매와 섞어 진공 건조를 하여 결정을 만들고 이를 질량 분석계에 도입하면 분자 깨짐 없이 고체상태 모분자의 질량 스펙트럼 측정 가능</p>
+
+            <p style="font-size: 22px; margin-top: 50px; color: #181C14; text-align: center; text-decoration: underline; text-underline-position: under; "><b>Conformational chemistry</b></p>
+
+<div style="text-align: center;">
+
+            <img src="분광.png" alt="사진 1" style="width: 800px; height: 400px;  id="img1" ;>
+
+</div>
+
+<div id="section-c">
+
+            <p style="font-size: 25px;  color: #181C14; text-align: center;  padding: 30px;   "><b>Optical nano material development & Analysis</b></p>
+
+            <p style="font-size: 22px; color: #181C14; text-align: center; text-decoration: underline; text-underline-position: under;  margin-top: 10px; "><b>Sythesis of highly efficient SERS substrates</b></p>
+
+<div style="text-align: center;">
+
+            <img src="https://cc.kangwon.ac.kr/~chkwon/2015%20Lab%20Intro2_3.jpg" alt="사진 1" style="width: 800px; height: 400px;  id="img1" ;>
+
+</div>
+
+            <p style="font-size: 22px; color: #181C14; text-align: center; text-decoration: underline; text-underline-position: under; margin-top: 50px; "><b> Surface-enhanced Raman spectroscopy</b></p>
+
+<div style="text-align: center;">
+
+            <img src="https://cc.kangwon.ac.kr/~chkwon/SERS.jpg" alt="사진 1" style="width: 800px; height: 400px;  id="img1" ;>
 
 
-  
-</p>
-</div
+</div>
+
+<div id="section-d">
+
+            <p style="font-size: 25px; color: #181C14; text-align: center; padding: 50px;  "><b>Quantum chemical calculation</b></p>
+
+            <p style="font-size: 22px;  color: #181C14; text-align: center; text-decoration: underline; text-underline-position: under;"><b> Franck-Condon simulation</b></p>
+
+            <p style="font-size: 22px;  color: #181C14; text-align: center; text-decoration: underline; text-underline-position: under;"><b> SERS simulation</b></p>
+
+</div>
 
     <!-- 🔹 푸터 추가 -->
     <div class="footer">
