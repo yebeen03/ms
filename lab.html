@@ -1,267 +1,792 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mass Spectroscopy Laboratory</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mass Spectroscopy Laboratory</title>
+    <style>
+        body {
+            margin-left: 0;
+            font-family: 'Arial', sans-serif;
+            color: white;
+            text-align: left;
+            padding: 0;
+            background-color: white;
+            display: block;
+            width: 100%;
+    position: relative;  /* 🔹 추가 */
+    z-index: 0;           /* 🔹 추가 */
+        }
+
+
+
+        /* 푸터 설정: 스크롤 후 맨 아래에서 보이게 함 */
+        .footer {
+            height: 80px;
+            position: relative;
+            bottom: -60px; /* 기본적으로 페이지 아래에 숨겨둠 */
+            left: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #E9E8E8;
+            border-top: 1px solid #E9E8E8;
+            padding: 10px;
+            font-size: 14px;
+            color: black;
+            text-align: center;
+            transition: bottom 0.5s ease-in-out; /* 스크롤 끝까지 내리면 부드럽게 나타나게 설정 */
+        }
+
+        /* 푸터 내용 설정 */
+        .footer small {
+            color: black;
+            font-size: 10px;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+        .footer .address {
+            margin-bottom: 5px;
+            color: purple;
+        }
+
+        .footer .lab-name {
+            color: purple;
+        }
+
+        .footer .address span {
+            color: purple;
+            font-size: 10px;
+        }
+
+        .footer .copyright {
+            color: black;
+            margin: 0;
+        }
+
+        .footer a {
+            color: black;
+            text-decoration: none;
+        }
+
+  
+
+        .header h1 {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 36px; /* h1 글씨 크기를 36px로 설정 */
+            margin-bottom: 70px;
+        }
+
+        h3 {
+            font-size: 30px; /* h3 글씨 크기 */
+            font-weight: bold; /* 글씨 두껍게 */
+            color: black; /* 글씨 색을 어두운 파란색으로 설정 */
+            margin-top: 20px; /* 위쪽 여백 추가 */
+            text-decoration: underline; /* 밑줄 추가 */
+            text-underline-position: under;
+        }           
+
+        .header h2 {
+            position: relative;
+            z-index: 1; /* 배경 위로 올리기 */
+            font-size: 36px; /* h2 글씨 크기 조정 */
+            color: white; /* 글자 색 유지 */
+        }
+
+        /* 네비게이션 바 스타일 */
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 2px solid #D8D8D8;
+
+
+        }
+
+        .nav a {
+            color: #181C14;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-item:hover {
+            background-color: #E9E8E8;
+            color: darkblue;
+        }
+
+        .nav-item.active {
+            color: darkblue;
+        }
+
+
+        .logo img {
+            height: 50px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 15px;
+            margin-left: auto;
+            margin-right: 40px;
+        }
+
+        /* 본문 내용 */
+        .content {
+            background-color: transparent !important;
+            color: #181C14;
+            padding: 80px 20px 20px;
+            min-height: 100vh;
+            text-align: left;
+            margin-left: 100px;
+  position: relative;
+  z-index: 1;
+         }
+
+        .text {
+      flex: 1; /* 텍스트 영역이 남은 공간을 차지하도록 설정 */
+      text-align: left;
+      padding-right: 20px; /* 텍스트와 이미지 사이 여백 */
     }
 
-    body {
-      font-family: 'Arial', sans-serif;
-      color: #181C14;
-      background-color: white;
+    .text-right {
+      margin-left: 20px; /* 이미지와 텍스트 사이 여백 */
     }
 
-    img {
-      width: 100%;
+
+   .image {
+      width: 300px; /* 이미지 크기 설정 */
       height: auto;
-      display: block;
     }
 
-    .container {
-      width: 90%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px 0;
+    .bottom-image {
+      text-align: left; /* 아래 이미지 중앙 정렬 */
+      margin-top: 20px;
     }
 
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: white;
-      padding: 10px 20px;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
+    /* flexbox 컨테이너 */
+    .bottom-image-container {
+      display: flex; /* 요소들을 수평으로 배치 */
+      align-items: center; /* 수직 정렬을 위쪽으로 맞춤 */
+      margin-top: 20px;
+    }
+ 
+
+    .bottom-image img {
+      width: 100%; /* 이미지 크기를 100%로 설정 */
+      max-width: 600px; /* 최대 너비를 600px로 제한 */
+      height: auto; /* 자동으로 비율 맞춰서 크기 조정 */
+      margin-left: 20px;
+      position: absolute;
+      margin-top: -550px;
+    }
+
+
+        .scroll-section {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            text-align: left;
+        }
+
+        h3 {
+            font-size: 30px;
+            line-height: 1.5;
+        }
+
+        p {
+            font-size: 20px;
+            line-height: 3.0;
+        }
+
+        .footer p {
+            font-size: 14px;
+            line-height: 1.2;
+        }
+
+      .image-gallery {
+            text-align: center; /* 이미지 & 텍스트 중앙 정렬 */
+            width: 250px; /* 개별 이미지 크기 고정 */
+            margin-top: -20px;
+        }
+
+.menu-btn {
+    display: none; /* 기본적으로 숨겨두기 */
+    cursor: pointer;
+    font-size: 30px;
+    background: none;
+    border: none;
+    color: #181C14;
+}
+
+/* 네비게이션 메뉴 (기본적으로 PC에서 보이게) */
+.nav-menu {
+    display: flex; /* PC에서는 기본 네비게이션 표시 */
+    gap: 15px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: center;
+  margin: 70px 0 0px;
+  width: 100vw;             /* 🔸 전체 가로폭으로! */
+  height: 350px;           /* 🔸 높이도 늘리기 (원하는 만큼) */
+  padding: 0;
+  font-size: 30px;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+.header-box {
+  position: relative;
+  background-color: none;      /* 네모 배경색 */
+  color: black;                   /* 글자색 */
+  padding: 15px 30px;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  width: 100%; /* 가로 전체 채우기 */
+  max-width: none;     /* 🔸 이걸로 제한 해제 */
+  background-size: cover;
+  display: flex;
+  align-items: center;       /* 세로 가운데 */
+  justify-content: center;   /* 가로 가운데 */
       border-bottom: 2px solid #D8D8D8;
-    }
+      border-top: 2px solid #D8D8D8;
+
+}
+
+.image-part {
+  flex: 3;
+  background-color: #000;
+  hight: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.image-part img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;}
+
+.text-part {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-image: url("space.jpg");
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;}
+
+.text-part::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(255, 255, 255, 0.7);  /* 흰색 반투명 덮개 */
+  z-index: 1;
+}
+
+.header-text {
+  position: relative;
+  z-index: 2; /* 오버레이 위에 배치 */
+  color: #181C14;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.section-tabs {
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid #D8D8D8;
+  overflow: hidden;
+  width: 97%;
+  height: 80px;
+  margin: 60px auto;
+  background-color: white;
+ text-align: center;
+justify-content: center;  
+  align-items: center;         /* 세로 중앙 정렬 */
+  justify-content: center;     /* 가로 중앙 정렬 */
+
+}
+
+.section-tabs a {
+  flex: 1;
+  text-align: center;
+  padding: 15px 0;
+  text-decoration: none;
+  color: #181C14;
+  font-weight: bold;
+  font-size: 15px;
+  border-right: 2px solid #D8D8D8;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  align-items: center;         /* 세로 중앙 정렬 */
+  justify-content: center;     /* 가로 중앙 정렬 */
+}
+
+.section-tabs a:last-child {
+  border-right: none; /* 마지막 항목엔 오른쪽 테두리 제거 */
+}
+
+.section-tabs a:hover {
+  background-color: #F0F0F0;
+  color: darkblue;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* 모바일 (768px 이하)에서만 적용 */
+@media (max-width: 768px) {
+
+                .logo img {
+            height: 30px;
+            margin-left: 85px;
+        }
+
+/* 모든 요소에 대해 좌우 스크롤 방지 */
+* {
+    overflow-x: hidden; /* 모든 요소에 대해 좌우 스크롤 방지 */
+    box-sizing: border-box; /* 모든 요소의 크기 계산에 padding, border 포함 */
+}
+
+
+        .footer {
+            height: 90px;
+            width: 100%;
+       }
 
     .nav {
-      display: flex;
-      gap: 15px;
-    }
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: 0; /* 이 줄을 꼭 추가하세요! */
+        z-index: 3000;      /* 본문 위에 올라오도록 */
+        height: 100vh; /* 전체 화면 높이 */
+        padding-top: 100px;
+        transition: right 0.3s ease-in-out;
+        text-align: left; /* 메뉴 텍스트 왼쪽 정렬 */
+        padding-left: 20px; /* 좌측 여백 추가 */
+}
 
     .nav a {
-      color: #181C14;
-      text-decoration: none;
-      font-size: 1rem;
-      font-weight: bold;
-      padding: 10px 20px;
+        color: black; /* 글자 색상 */
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 15px 0;
+        display: block;
+        transition: background 0.3s ease-in-out;
+    }
+
+    /* 메뉴가 활성화되면 보이도록 설정 */
+    .nav.active {
+        display: flex; /* 햄버거 버튼 클릭 시 나타남 */
     }
 
     .nav-item.active {
-      color: darkblue;
+        background-color: transparent; /* 배경색을 투명으로 설정 */
+        color: #435585;
+            text-decoration: underline; /* 텍스트에 밑줄 추가 */
+    text-underline-position: under; /* 밑줄의 위치를 텍스트 바로 아래로 설정 */
     }
+
 
     .menu-btn {
-      display: none;
-    }
-
-    .overlay {
-      display: none;
-    }
-
-    .section-header {
-      display: flex;
-      flex-wrap: wrap;
-      width: 100%;
-      height: auto;
-      margin-top: 80px;
-    }
-
-    .image-part, .text-part {
-      flex: 1 1 50%;
-      min-width: 300px;
-      height: 300px;
-      position: relative;
-    }
-
-    .image-part img {
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
-    }
-
-    .text-part {
-      background-image: url("space.jpg");
-      background-size: cover;
-      background-position: center;
-    }
-
-    .text-part::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-color: rgba(255, 255, 255, 0.7);
-      z-index: 1;
-    }
-
-    .header-text {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      text-align: center;
-      font-size: 2rem;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-    }
-
-    .section-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      border: 2px solid #D8D8D8;
-      margin: 20px auto;
-      width: 95%;
-      background-color: white;
-    }
-
-    .section-tabs a {
-      flex: 1 1 200px;
-      padding: 15px;
-      text-align: center;
-      text-decoration: none;
-      color: #181C14;
-      border-right: 2px solid #D8D8D8;
-      font-weight: bold;
-    }
-
-    .section-tabs a:last-child {
-      border-right: none;
-    }
-
-    .section-tabs a:hover {
-      background-color: #F0F0F0;
-      color: darkblue;
-    }
-
-    section {
-      padding: 40px 20px;
-    }
-
-    section h2 {
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    section p {
-      font-size: 1rem;
-      line-height: 1.8;
-      margin-bottom: 20px;
-    }
-
-    .footer {
-      padding: 20px;
-      background-color: #E9E8E8;
-      text-align: center;
-      font-size: 0.9rem;
-      color: black;
-    }
-
-    @media (max-width: 768px) {
-      .nav {
-        display: none;
-      }
-      .menu-btn {
         display: block;
-      }
+        position: absolute;
+        top: 5px;
+        right: 2px;
+        font-size: 30px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 1001;       
+}
+
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5); /* 검은색 반투명 배경 */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 999; /* 네비 뒤로 오도록 설정 */
+}
+
+/* 네비게이션 바가 활성화되었을 때 */
+.nav-container.active {
+    background-color: rgba(0, 0, 0, 0.5); /* 배경을 검정색으로 */
+    border-bottom: 2px solid  rgba(0, 0, 0, 0.5);/* 아래 경계선 색을 검정색으로 변경 */
+
+}
+
+/* 작은 네모를 표시하는 스타일 */
+.nav-item.active::after {
+    display: none;
+}
+
+/* 네비가 활성화되면 오버레이도 보이게 */
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+    .nav-menu {
+        display: none; /* 모바일에서는 기본 네비게이션 숨김 */
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        margin-right: 0px; /* 화면 밖으로 숨김 */
+        width: 300px;
+        height: 100vh;
+        transition: right 0.3s ease-in-out;
+        z-index: 1000;
     }
-  </style>
+
+/* 네비가 활성화될 때 */
+.nav-menu.active {
+    right: 0;
+}
+
+
+    /* 네비게이션 메뉴 활성화 시 오른쪽에서 나타나도록 설정 */
+    .nav.active {
+        right: 0; /* 화면 안으로 들어옴 */
+        margin-right: 0px;
+        background-color: #FAFAF8 !important;
+        text-align: left !important;
+        width: 300px;
+    }
+
+.nav.active .nav-item {
+    margin-top: -40px; /* 텍스트를 위로 올리기 */
+        font-size: 18px;
+        line-height: 3.0;
+
+}
+
+        h1 {
+            font-size: 18px; /* h1 글씨 크기를 36px로 설정 */ 
+            margin-top: 70px;
+            margin-left: -10px;
+
+        }
+
+        h3 {
+            font-size: 15px;
+            line-height: 1.5;
+            margin-left: 40px !important;
+            margin-top: 5px !important;
+        }
+
+        p {
+            font-size: 13px;
+            line-height: 3.0;
+            margin-left: 20px !important;
+            margin-top: 5px !important;
+    white-space: nowrap; /* 줄바꿈 방지 */
+
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 13px;
+            line-height: 1.2;
+        }
+
+
+
+.section-header {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0 0px;
+  width: 100vw;             /* 🔸 전체 가로폭으로! */
+  height: 180px;           /* 🔸 높이도 늘리기 (원하는 만큼) */
+  padding: 0;
+  font-size: 20px;
+  font-weight: bold;
+
+}
+
+.header-box {
+  position: relative;
+  background-color: none;      /* 네모 배경색 */
+  color: black;                   /* 글자색 */
+  padding: 15px 30px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  width: 100%; /* 가로 전체 채우기 */
+  max-width: none;     /* 🔸 이걸로 제한 해제 */
+  background-size: cover;
+  display: flex;
+  align-items: center;       /* 세로 가운데 */
+  justify-content: center;   /* 가로 가운데 */
+  outline: 2px solid #D8D8D8;
+
+}
+
+.header-text {
+  position: relative;
+  z-index: 2; /* 오버레이 위에 배치 */
+  color: #181C14;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+}
+    </style>
 </head>
 <body>
-  <div class="nav-container">
-    <div class="logo">
-      <img src="https://github.com/yebeen03/mass/blob/main/%EB%A1%9C%EA%B3%A0%20%EB%B8%94%EB%9E%99.png?raw=true" alt="Lab Logo" style="height: 40px">
+<!-- 🔹 오버레이 추가 -->
+<div class="overlay"></div>
+
+    <!-- 🔹 네비게이션 바 -->
+    <div class="nav-container">
+        <div class="logo">
+            <img src="https://github.com/yebeen03/mass/blob/main/%EB%A1%9C%EA%B3%A0%20%EB%B8%94%EB%9E%99.png?raw=true" alt="Lab Logo">
+        </div>
+        <button class="menu-btn">☰</button> <!-- 햄버거 버튼 -->
+        <div class="nav">
+            <a href="./index.html" class="nav-item home active">Home</a>
+            <a href="./PI.html" class="nav-item">PI</a>
+            <a href="./lab.html" class="nav-item">Lab Intro</a>
+            <a href="./members.html" class="nav-item">Members</a>
+            <a href="./publication.html" class="nav-item">Publication</a>
+            <a href="./photos.html" class="nav-item">Photos</a>
+
+        </div>
     </div>
-    <button class="menu-btn">☰</button>
-    <div class="nav">
-      <a href="index.html" class="nav-item">Home</a>
-      <a href="PI.html" class="nav-item">PI</a>
-      <a href="lab.html" class="nav-item active">Lab Intro</a>
-      <a href="members.html" class="nav-item">Members</a>
-      <a href="publication.html" class="nav-item">Publication</a>
-      <a href="photos.html" class="nav-item">Photos</a>
+
+    
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const navItems = document.querySelectorAll('.nav-item');
+        const currentPath = window.location.pathname.split("/").pop().toLowerCase(); // 현재 파일명 소문자로 변환
+
+        console.log("현재 페이지:", currentPath); // 디버깅용 콘솔 출력
+
+        navItems.forEach(item => {
+            item.classList.remove('active'); // 모든 메뉴에서 active 제거
+
+            // 현재 페이지와 a 태그 href 값이 정확히 일치하는 경우 active 추가
+            if (item.getAttribute('href') && item.getAttribute('href').toLowerCase().includes(currentPath)) {
+                console.log("활성화된 메뉴:", item.textContent); // 디버깅용 콘솔 출력
+                item.classList.add('active');
+            }
+        });
+    });
+</script>
+<script>
+const menuButton = document.querySelector('.menu-btn');
+const nav = document.querySelector('.nav');
+const overlay = document.querySelector('.overlay');
+const navContainer = document.querySelector('.nav-container');
+
+
+// 메뉴 버튼 클릭 시 네비와 오버레이 활성화
+menuButton.addEventListener('click', () => {
+    nav.classList.toggle('active');
+    overlay.classList.toggle('active');
+    navContainer.classList.toggle('active'); // 네비게이션 바 전체에 active 클래스 추가
+
+    menuButton.classList.toggle('active'); // 'active' 클래스를 추가하거나 제거하여 X로 바꾸기
+
+    console.log('active class toggled: ', menuButton.classList.contains('active'));
+
+    // 햄버거 버튼을 X로 변경 / 다시 햄버거로 변경
+    if (nav.classList.contains('active')) {
+        menuButton.textContent = '✖'; // 네비가 활성화되면 X로 변경
+    } else {
+        menuButton.textContent = '☰'; // 네비가 비활성화되면 햄버거로 변경
+    }
+});
+
+// 오버레이 클릭 시 네비 닫기
+overlay.addEventListener('click', () => {
+    nav.classList.remove('active');
+    overlay.classList.remove('active');
+    navContainer.classList.remove('active'); // active 클래스 제거
+    menuButton.textContent = '☰'; // 오버레이 클릭 시 버튼을 다시 햄버거로 변경
+
+
+});
+</script>
+
+<script>
+// 모든 nav-item에 클릭 이벤트 추가
+const navItems = document.querySelectorAll('.nav-item');
+
+navItems.forEach(item => {
+  item.addEventListener('click', function() {
+    // 화면 크기가 모바일일 경우에만 동작
+    if (window.innerWidth <= 768) {
+      // 먼저 모든 항목에서 active 클래스를 제거
+      navItems.forEach(nav => nav.classList.remove('active'));
+    
+      // 클릭한 항목에 active 클래스 추가
+      this.classList.add('active');
+    }
+  });
+});
+</script>
+
+
+    <!-- 🔹 본문 콘텐츠 -->
+<div class="section-header">
+<div class="header-box image-part">
+    <img src="space2.jpg" alt="헤더 이미지">
+  </div>
+  <div class="header-box text-part">
+    <div class="header-text">RESEARCH FIELDS IN INTEREST</div>
+  </div>
+</div>
+
+<div class="section-tabs">
+  <a href="#section-a">INTRO</a>
+  <a href="#section-b">Spectroscopic analysis <br>& Mass spectrometry</a>
+  <a href="#section-c">Optical nano material development <br>& Analysis</a>
+  <a href="#section-d">Quantum chemical calculation</a>
+</div>
+
+<div id="section-a">
+
+            <p style="font-size: 25px; color: #181C14; text-align: center; padding: 30px;  margin: 20px; "><b>INTRO</b></p>
+
+<div style="text-align: center;">
+
+            <img src="space.jpg" alt="사진 1" style="width: 800px; height: 400px;  id="img1" ;>
+
+</div>
+            <p style="font-size: 18px; color: #181C14; margin-left: 50px;">⦁ 성간 물질(Interstellar medium)은 은하의 형성에 따른 원시적인 잔여물, 별들의 잔해, 미래의 별과 행성을 위한 성분이 포함되어 있어, 성간 물질을 연구하는 것은 은하의 구조와 별의 수명주기를 이해하는 데 필수적이며, 지구에 존재하는 생명체의 근원에 대한 정보를 주기 때문에 성간 물질에 존재하는 화학종에 대한 연구(중성분자, 라디칼, 분자 양이온 등)는 매우 중요</p>
+
+
+<div style="text-align: center;">
+
+            <img src="아미노산.png" alt="사진 1" style="width: 800px; height: 400px;  margin-top: 50px; id="img1" ;>
+
+</div>
+            <p style="font-size: 18px; color: #181C14; margin-left: 50px; ">⦁ 아미노산이나 핵 염기와 같은 생물학적 분자들은 상온에서 대부분 고체로 존재하기 때문에 이러한 분자의 질량 스펙트럼 측정을 위해서는 열적 가열을 통해 기화가 필요하지만 대부분 열을 가하면 분자 번형이 일어나거나 분자 깨짐이 발생하기 때문에 본자 본연의 성질을 연구하는데 큰 어려움 존재<br>⦁ 이러한 단점을 극복하면서 질량 스펙트럼을 측정할 수 있는 방법들이 다양하게 연구, 개발되고 있으며 최근 우리 연구실(mass spectro scopy laboratory)에서는적외선과 진공 자외선을 이용한 탈착/이온화 법을 개발</p>
+
+<div style="text-align: center;">
+
+            <img src="질량분석.png" alt="사진 1" style="width: 800px; height: 400px; margin-top: 50px;  id="img1" ;>
+
+</div>
+            <p style="font-size: 18px; color: #181C14; margin-left: 50px; ">⦁ 분자의 질량 분석을 위해서는 분자를 이온화 하여야 하며, 이때 대부분의 유기 분자들을 이온으로 만들기 위해서는 진공 자외선에 해당하는 광자 에너지 필요, 이 영역의 에너지를 만들기 위해서는 분자가 자외선을 연속적으로 두 번 흡수 하거나 진공 자외선 에너지를 갖는 광자를 한 번 흡수<br>⦁ 우리 실험실에서는 7.9 ~ 10.1eV의 에너지를 가지는 진공 자외선을 만들고 있으며, 이렇게 만든 진공 자외선은 성간 물질에 존재하는 화학종이나 생물학적 분자의 구조를 연구하는 데 이용</p>
+
+<div id="section-b">
+
+            <p style="font-size: 25px; color: #181C14; text-align: center; padding: 30px; "><b>Spectroscopic analysis & Mass spectrometry</b></p>
+
+            <p style="font-size: 22px; margin-top: 30px; color: #181C14; text-align: center; text-decoration: underline; text-underline-position: under;"><b>VUV-MATI</b></p>
+
+<div style="text-align: center;">
+
+            <img src="마티.png" alt="사진 1" style="width: 800px; height: 400px;  id="img1" ;>
+
+</div>
+            <p style="font-size: 18px; color: #181C14; margin-left: 50px;">⦁ 진공자외선 레이저를 쪼여 분자를 리드버그 상태 (이온화한계 바로 밑에 있는 상태)로 올림<br>⦁ 전기장 펄스를 걸어 리드버그 전자를 떼냄→ 이온화<br>⦁ 진공자외선 레이저 파장을 바꾸어 이온 전류 검출→ MATI 스펙트럼<br>⦁ MATI 스펙트럼 = 이온의 진동 스펙트럼 = 이온 구조에 대한 정보를 반영 </p>
+
+
+            <p style="font-size: 22px; margin-top: 50px; color: #181C14; text-align: center; text-decoration: underline; text-underline-position: under; "><b>IR resonant VUV-MATI</b></p>
+
+<div style="text-align: center;">
+
+            <img src="레조넌트.png" alt="사진 1" style="width: 800px; height: 400px;  id="img1" ;>
+
+</div>
+            <p style="font-size: 18px; color: #181C14; margin-left: 50px; ">⦁ 분자 내 존재하는 개별 이형태체의 중성 상태 진동 스펙트럼을 선택적으로 측정할 수 있는 방법인 IR dip VUV-MATI 분광법(하단)과 개별 이형태체의 이온 진동 스펙트럼을 선택적으로 측정할 수 있는 IR hole-burn VUV-MATI 분광법(상단)</p>
+
+            <p style="font-size: 22px; margin-top: 50px; color: #181C14; text-align: center; text-decoration: underline; text-underline-position: under; "><b>IR desorption VUV photoionization</b></p>
+
+<div style="text-align: center;">
+
+            <img src="광이온화.png" alt="사진 1" style="width: 800px; height: 400px;  id="img1" ;>
+
+</div>
+            <p style="font-size: 18px; color: #181C14; margin-left: 50px; ">⦁ 매트릭스 보조 레이저를 탈착 이온화법(MARDI)의 매트릭스 대신 흑연을 시료, 그리고 용매와 섞어 진공 건조를 하여 결정을 만들고 이를 질량 분석계에 도입하면 분자 깨짐 없이 고체상태 모분자의 질량 스펙트럼 측정 가능</p>
+
+            <p style="font-size: 22px; margin-top: 50px; color: #181C14; text-align: center; text-decoration: underline; text-underline-position: under; "><b>Conformational chemistry</b></p>
+
+<div style="text-align: center;">
+
+            <img src="분광.png" alt="사진 1" style="width: 800px; height: 400px;  id="img1" ;>
+
+</div>
+
+<div id="section-c">
+
+            <p style="font-size: 25px;  color: #181C14; text-align: center;  padding: 30px;   "><b>Optical nano material development & Analysis</b></p>
+
+            <p style="font-size: 22px; color: #181C14; text-align: center; text-decoration: underline; text-underline-position: under;  margin-top: 10px; "><b>Sythesis of highly efficient SERS substrates</b></p>
+
+<div style="text-align: center;">
+
+            <img src="https://cc.kangwon.ac.kr/~chkwon/2015%20Lab%20Intro2_3.jpg" alt="사진 1" style="width: 800px; height: 400px;  id="img1" ;>
+
+</div>
+
+            <p style="font-size: 22px; color: #181C14; text-align: center; text-decoration: underline; text-underline-position: under; margin-top: 50px; "><b> Surface-enhanced Raman spectroscopy</b></p>
+
+<div style="text-align: center;">
+
+            <img src="https://cc.kangwon.ac.kr/~chkwon/SERS.jpg" alt="사진 1" style="width: 800px; height: 400px;  id="img1" ;>
+
+
+</div>
+
+<div id="section-d">
+
+            <p style="font-size: 25px; color: #181C14; text-align: center; padding: 50px;  "><b>Quantum chemical calculation</b></p>
+
+            <p style="font-size: 22px;  color: #181C14; text-align: center; text-decoration: underline; text-underline-position: under;"><b> Franck-Condon simulation</b></p>
+
+            <p style="font-size: 22px;  color: #181C14; text-align: center; text-decoration: underline; text-underline-position: under;"><b> SERS simulation</b></p>
+
+</div>
+
+    <!-- 🔹 푸터 추가 -->
+    <div class="footer">
+        <p class="address">강원도 춘천시 강원대학길 1 자연과학대학 화학과 자1-311호</p>
+        <p class="copyright">Copyright(C) 2016 by <span class="lab-name">Mass Spectroscopy Lab</span>. All Rights Reserved.</p>
+        <p><a href="mailto:someone@example.com">mailto</a></p>
     </div>
-  </div>
 
-  <div class="section-header">
-    <div class="image-part">
-      <img src="space2.jpg" alt="헤더 이미지">
-    </div>
-    <div class="text-part">
-      <div class="header-text">RESEARCH FIELDS IN INTEREST</div>
-    </div>
-  </div>
-
-  <div class="section-tabs">
-    <a href="#section-a">INTRO</a>
-    <a href="#section-b">Spectroscopic Analysis<br>& Mass Spectrometry</a>
-    <a href="#section-c">Optical Nano Material Development<br>& Analysis</a>
-    <a href="#section-d">Quantum Chemical Calculation</a>
-  </div>
-
-  <div class="container">
-    <section id="section-a">
-      <h2>INTRO</h2>
-      <img src="space.jpg" alt="우주 이미지">
-      <p>⦁ 성간 물질 연구의 중요성과 그 안의 화학종 탐색 배경</p>
-      <img src="아미노산.png" alt="아미노산">
-      <p>⦁ 아미노산 등 고체 생물학적 분자의 기화 및 분석 어려움, 새로운 이온화 기술 도입</p>
-      <img src="질량분석.png" alt="질량 분석">
-      <p>⦁ 진공 자외선 기반 이온화 기술을 통해 구조 연구 가능</p>
-    </section>
-
-    <section id="section-b">
-      <h2>Spectroscopic Analysis & Mass Spectrometry</h2>
-      <h3>VUV-MATI</h3>
-      <img src="마티.png" alt="VUV-MATI">
-      <p>⦁ 리드버그 상태 유도 및 MATI 스펙트럼 측정</p>
-
-      <h3>IR Resonant VUV-MATI</h3>
-      <img src="레조넌트.png" alt="레조넌트">
-      <p>⦁ IR dip 및 hole-burn VUV-MATI로 이형태체 분광 가능</p>
-
-      <h3>IR Desorption VUV Photoionization</h3>
-      <img src="광이온화.png" alt="광이온화">
-      <p>⦁ 고체상태 모분자의 손상 없는 질량 분석 실현</p>
-
-      <h3>Conformational Chemistry</h3>
-      <img src="분광.png" alt="분광">
-    </section>
-
-    <section id="section-c">
-      <h2>Optical Nano Material Development & Analysis</h2>
-      <h3>SERS Substrates</h3>
-      <img src="https://cc.kangwon.ac.kr/~chkwon/2015%20Lab%20Intro2_3.jpg" alt="SERS">
-
-      <h3>Surface-enhanced Raman Spectroscopy</h3>
-      <img src="https://cc.kangwon.ac.kr/~chkwon/SERS.jpg" alt="SERS">
-    </section>
-
-    <section id="section-d">
-      <h2>Quantum Chemical Calculation</h2>
-      <h3>Franck-Condon Simulation</h3>
-      <h3>SERS Simulation</h3>
-    </section>
-  </div>
-
-  <div class="footer">
-    <p class="address">강원도 춘천시 강원대학길 1 자연과학대학 화학과 자1-311호</p>
-    <p class="copyright">Copyright(C) 2016 by <span class="lab-name">Mass Spectroscopy Lab</span>. All Rights Reserved.</p>
-    <p><a href="mailto:someone@example.com">mailto</a></p>
-  </div>
 </body>
 </html>
